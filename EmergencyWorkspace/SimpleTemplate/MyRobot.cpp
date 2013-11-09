@@ -10,7 +10,9 @@ class RobotDemo : public SimpleRobot
 	Solenoid driveA;
 	Solenoid driveB;
 	Relay *pneumaRelay;
+	
 	DigitalInput irSensor;
+	DigitalInput limitSwitch;
 
 public:
 	RobotDemo(void):
@@ -19,7 +21,8 @@ public:
 		pressureInCylinder(1),
 		driveA(1),
 		driveB(8),
-		irSensor(5)
+		irSensor(5),
+		limitSwitch(10)
 
 	{
 		pneumaRelay = new Relay(1);//, Relay::kForwardOnly
@@ -33,13 +36,15 @@ public:
 	void OperatorControl(void)
 	{
 		bool onePressed=false;
-		bool twoPressed=false;
+		// bool twoPressed=false;
 		bool relaySet=false;
 		
 		
 		while (IsOperatorControl())
 		{
-			SmartDashboard::PutBoolean("wub",irSensor.Get());
+			SmartDashboard::PutBoolean("IR Sensor",irSensor.Get());
+			SmartDashboard::PutBoolean("Limit Switch", limitSwitch.Get());
+			
 			
 			// Update Smart Dashboard values
 			SmartDashboard::PutBoolean("onePressed",onePressed);
@@ -58,18 +63,6 @@ public:
 			{
 				onePressed=false;
 			}
-			
-			// Adjusts relaySet based on IR sensor
-			/*
-			if (stick.GetRawButton(1))
-			{
-				relaySet = true;
-			}
-			else
-			{
-				relaySet = !(irSensor.Get());
-			}
-			*/
 			
 			// Controls relay with regard to the 'relaySet' boolean and Pressa.
 			if (relaySet&&!pressureInCylinder.Get())
