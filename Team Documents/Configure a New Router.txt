@@ -1,0 +1,28 @@
+How to Configure a Router
+=========================
+
+Generic Info:
+	SSID:
+		2840_<robot_name>
+		"2840_Asimov" and "2840_Bates" are already being used.
+	DHCP Server:
+		DHCP IP Address Range: 10.28.40.150 to 199
+		Default Subnet Mask: 255.255.255.0
+		DHCP Lease Time: 1440 (minutes)
+
+Specific D-Link Instructions:
+
+1. Connect to the router's network
+2. Open your web browser and go to "http://dlinkap/"
+3. You should be prompted for a username and password.  The username is "Admin"; leave the password field blank.
+4. Click "Login" and then click "Setup" on the top bar.
+5. Enter the SSID (as specified above) in the "Wireless Network Name" field. Click "Save Settings" at the bottom.
+6. Wait while it saves.
+7. Click on "Advanced" on the top bar.
+8. On the left, click "DHCP Server."
+9. Ensure that the checkbox labeled "Enable DHCP Server" is checked.
+10. Fill in the DHCP IP Address Range and Default Subnet Mask as specified above.
+11. Click "Save Settings" in the orange "DHCP Server" Box at the top.
+12. Wait while it saves.
+13. Close your browser, disconnect from the network, and reconnect.
+14. Done!
