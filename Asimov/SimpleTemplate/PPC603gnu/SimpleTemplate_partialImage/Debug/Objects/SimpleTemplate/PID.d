@@ -1,6 +1,6 @@
 SimpleTemplate_partialImage/Debug/Objects/SimpleTemplate/PID.o:  \
- C:/OmniWorkspace/SimpleTemplate/PID.cpp \
-  C:/OmniWorkspace/SimpleTemplate/PID.h \
+ C:/Users/Driver\ Station/Documents/GitHub/FRC-2013-2014/Asimov/SimpleTemplate/PID.cpp \
+  C:/Users/Driver\ Station/Documents/GitHub/FRC-2013-2014/Asimov/SimpleTemplate/PID.h \
   C:/WindRiver/vxworks-6.3/target/h/WPILib/WPILib.h \
   C:/WindRiver/vxworks-6.3/target/h/string.h \
   C:/WindRiver/vxworks-6.3/target/h/types/vxANSI.h \
@@ -380,7 +380,7 @@ SimpleTemplate_partialImage/Debug/Objects/SimpleTemplate/PID.o:  \
   C:/WindRiver/vxworks-6.3/target/h/WPILib/WPIErrors.h \
   C:/WindRiver/vxworks-6.3/target/h/math.h
 
-C:/OmniWorkspace/SimpleTemplate/PID.h:
+C:/Users/Driver\ Station/Documents/GitHub/FRC-2013-2014/Asimov/SimpleTemplate/PID.h:
 
 C:/WindRiver/vxworks-6.3/target/h/WPILib/WPILib.h:
 

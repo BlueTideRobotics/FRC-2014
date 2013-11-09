@@ -31,7 +31,7 @@ else
 MODE_DIR := NonDebug
 endif
 OBJ_DIR := .
-WS_ROOT_DIR := C:/OmniWorkspace
+WS_ROOT_DIR := C:/Users/Driver\ Station/Documents/GitHub/FRC-2013-2014/Asimov
 PRJ_ROOT_DIR := $(WS_ROOT_DIR)/SimpleTemplate
 
 
