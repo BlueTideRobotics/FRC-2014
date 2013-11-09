@@ -59,6 +59,18 @@ public:
 				onePressed=false;
 			}
 			
+			// Adjusts relaySet based on IR sensor
+			/*
+			if (stick.GetRawButton(1))
+			{
+				relaySet = true;
+			}
+			else
+			{
+				relaySet = !(irSensor.Get());
+			}
+			*/
+			
 			// Controls relay with regard to the 'relaySet' boolean and Pressa.
 			if (relaySet&&!pressureInCylinder.Get())
 			{
@@ -68,6 +80,8 @@ public:
 			{
 				pneumaRelay->Set(Relay::kOff);
 			}
+			
+			/*
 			if(stick.GetRawButton(4))
 			{
 				driveA.Set(true);
@@ -88,14 +102,19 @@ public:
 			{
 				twoPressed=false;
 			}
-			// Uncomment to use magnetic sensor thingamajig
-			/*
-			else if (magneticSensor.Get())
+			*/
+			
+			if (irSensor.Get())
 			{
-				driveA.Set(false);
+				driveA.Set(true);
 				driveB.Set(false);
 			}
-			*/
+			else
+			{
+				driveA.Set(false);
+				driveB.Set(true);
+			} 
+			
 		}
 	}
 	
