@@ -1,5 +1,3 @@
-// Nicholas Currault, 11/8/13
-
 #include "WPILib.h"
 #include "Solenoid.h"
 
