@@ -1,3 +1,0 @@
-The "Pneumatics Testbed" workspace just sort of failed.
-
-Sage created the "EnergencyWorkspace" workspace to hold the code (improperly named, but it works!)
