@@ -36,7 +36,7 @@ public:
 	void OperatorControl(void)
 	{
 		bool onePressed=false;
-		// bool twoPressed=false;
+		bool twoPressed=false;
 		bool relaySet=false;
 		
 		
@@ -74,13 +74,12 @@ public:
 				pneumaRelay->Set(Relay::kOff);
 			}
 			
-			/*
 			if(stick.GetRawButton(4))
 			{
 				driveA.Set(true);
 				driveB.Set(false);
 			}
-			if(stick.GetRawButton(5))
+			else if(stick.GetRawButton(5))
 			{
 				driveA.Set(false);
 				driveB.Set(true);
@@ -95,18 +94,6 @@ public:
 			{
 				twoPressed=false;
 			}
-			*/
-			
-			if (irSensor.Get())
-			{
-				driveA.Set(true);
-				driveB.Set(false);
-			}
-			else
-			{
-				driveA.Set(false);
-				driveB.Set(true);
-			} 
 			
 		}
 	}
