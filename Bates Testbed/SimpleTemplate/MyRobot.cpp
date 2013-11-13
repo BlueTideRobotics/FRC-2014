@@ -10,9 +10,6 @@ class RobotDemo : public SimpleRobot
 	Solenoid driveA;
 	Solenoid driveB;
 	Relay *pneumaRelay;
-	
-	DigitalInput irSensor;
-	DigitalInput limitSwitch;
 
 public:
 	RobotDemo(void):
@@ -21,8 +18,6 @@ public:
 		pressureInCylinder(1),
 		driveA(1),
 		driveB(8),
-		irSensor(5),
-		limitSwitch(10)
 
 	{
 		pneumaRelay = new Relay(1);//, Relay::kForwardOnly
@@ -42,10 +37,6 @@ public:
 		
 		while (IsOperatorControl())
 		{
-			SmartDashboard::PutBoolean("IR Sensor",irSensor.Get());
-			SmartDashboard::PutBoolean("Limit Switch", limitSwitch.Get());
-			
-			
 			// Update Smart Dashboard values
 			SmartDashboard::PutBoolean("onePressed",onePressed);
 			SmartDashboard::PutBoolean("relaySet",relaySet);
