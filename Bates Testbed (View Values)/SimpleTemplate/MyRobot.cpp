@@ -2,24 +2,25 @@
 
 #include "WPILib.h"
 #include "Solenoid.h"
+#include <Ultrasonic.h>
 
 class RobotDemo : public SimpleRobot
 {	
 	DigitalInput irSensor;
 	DigitalInput limitSwitch;
-	DigitalInput ultraSonic;
 
-public:
+	Ultrasonic ultraSonic;
+
+public: 
 	RobotDemo(void):
 		irSensor(5),
 		limitSwitch(10),
-		ultraSonic(1)
 		
-
+		ultraSonic(1,3)
 	{
-		//leave this here
+			//leave this here
 	}
-
+	
 	void Autonomous(void)
 	{
 	}
@@ -27,12 +28,13 @@ public:
 	void OperatorControl(void)
 	{
 		
-		
 		while (IsOperatorControl())
 		{
+			ultraSonic.Ping();
 			SmartDashboard::PutBoolean("IR Sensor",irSensor.Get());
-			SmartDashboard::PutBoolean("Limit Switch", limitSwitch.Get());
-			SmartDashboard::PutNumber("Ultra Sonic", ultraSonic.Get());
+			SmartDashboard::PutBoolean("Limit Switch", !limitSwitch.Get ());
+			SmartDashboard::PutNumber("Ultra Sonic", ultraSonic.GetRangeInches());
+			SmartDashboard::PutBoolean("wubz",ultraSonic.IsRangeValid());
 		}
 	}
 	
