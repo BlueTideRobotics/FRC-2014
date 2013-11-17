@@ -7,21 +7,25 @@ class RobotDemo : public SimpleRobot
 {
 	Joystick stick;
 	DigitalInput pressureInCylinder;
-	Solenoid driveA;
-	Solenoid driveB;
 	Relay *pneumaRelay;
+	
+	Solenoid liftUp;
+	Solenoid liftDown;
+	Solenoid gripperOpen;
+	Solenoid gripperClose;
 
 public:
 	RobotDemo(void):
 		stick(1),
 		
-		pressureInCylinder(1),
-		driveA(1),
-		driveB(8),
-
+		liftUp(1),
+		liftDown(3),
+		gripperOpen(6),
+		gripperClose(8),
+		
+		pressureInCylinder(7) // Formerly 1, but we have the ultrasonic ping connection there.
 	{
 		pneumaRelay = new Relay(1);//, Relay::kForwardOnly
-		//leave this here
 	}
 
 	void Autonomous(void)
@@ -30,21 +34,38 @@ public:
 
 	void OperatorControl(void)
 	{
+		/*
+		 * Control Guide
+		 * 
+		 * Button 1: toggle relaySet
+		 * Button 2: move lift down
+		 * Button 3: move lift up
+		 * Button 4: close gripper
+		 * Button 5: open gripper
+		 */
+		
 		bool onePressed=false;
-		bool twoPressed=false;
 		bool relaySet=false;
 		
+		// Initializing lift down
+		liftUp.Set(false);
+		liftDown.Set(true);
+		
+		//Initializing gripper open
+		gripperOpen.Set(true);
+		gripperClose.Set(false);
 		
 		while (IsOperatorControl())
 		{
 			// Update Smart Dashboard values
-			SmartDashboard::PutBoolean("onePressed",onePressed);
 			SmartDashboard::PutBoolean("relaySet",relaySet);
 			SmartDashboard::PutBoolean("Pressa",pressureInCylinder.Get());
-			SmartDashboard::PutBoolean("A",driveA.Get());
-			SmartDashboard::PutBoolean("B",driveB.Get());
+			SmartDashboard::PutBoolean("Lift Up",liftUp.Get());
+			SmartDashboard::PutBoolean("Lift Down",liftDown.Get());
+			SmartDashboard::PutBoolean("Gripper Open",gripperOpen.Get());
+			SmartDashboard::PutBoolean("Gripper Close",gripperClose.Get());
 			
-			// Adjusts relaySet based on button 1
+			// Adjust relaySet based on button 1
 			if(stick.GetRawButton(1)&&!onePressed)
 			{
 				onePressed=true;
@@ -55,7 +76,7 @@ public:
 				onePressed=false;
 			}
 			
-			// Controls relay with regard to the 'relaySet' boolean and Pressa.
+			// Control relay using 'relaySet' and the pressure sensor.
 			if (relaySet&&!pressureInCylinder.Get())
 			{
 				pneumaRelay->Set(Relay::kForward);
@@ -65,27 +86,27 @@ public:
 				pneumaRelay->Set(Relay::kOff);
 			}
 			
+			// Makes stuff move with solenoids
 			if(stick.GetRawButton(4))
 			{
-				driveA.Set(true);
-				driveB.Set(false);
+				gripperClose.Set(true);
+				gripperOpen.Set(false);
 			}
 			else if(stick.GetRawButton(5))
 			{
-				driveA.Set(false);
-				driveB.Set(true);
+				gripperClose.Set(false);
+				gripperOpen.Set(true);
 			}
-			else if (stick.GetRawButton(2)&&!twoPressed) 
+			else if (stick.GetRawButton(2))
 			{
-				driveA.Set(!driveA.Get());
-				driveB.Set(!driveB.Get());
-				twoPressed=true;
+				liftUp.Set(false);
+				liftDown.Set(true);
 			}
-			else if (!stick.GetRawButton(2))
+			else if (stick.GetRawButton(3))
 			{
-				twoPressed=false;
+				liftUp.Set(true);
+				liftDown.Set(false);
 			}
-			
 		}
 	}
 	

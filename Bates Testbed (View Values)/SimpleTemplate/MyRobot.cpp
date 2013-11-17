@@ -1,7 +1,6 @@
 // Nicholas Currault, 11/8/13
 
 #include "WPILib.h"
-#include "Solenoid.h"
 #include <Ultrasonic.h>
 
 class RobotDemo : public SimpleRobot
