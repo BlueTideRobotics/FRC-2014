@@ -23,8 +23,8 @@ public:
 		gripperOpen(6),
 		gripperClose(8),
 		
-		pressureInCylinder(7) // Formerly 1, but we have the ultrasonic ping connection there.
-	{
+		pressureInCylinder(1)
+	 {
 		pneumaRelay = new Relay(1);//, Relay::kForwardOnly
 	}
 
@@ -87,22 +87,22 @@ public:
 			}
 			
 			// Makes stuff move with solenoids
-			if(stick.GetRawButton(4))
+			if(stick.GetRawButton(4)) // Close
 			{
 				gripperClose.Set(true);
 				gripperOpen.Set(false);
 			}
-			else if(stick.GetRawButton(5))
+			else if(stick.GetRawButton(5)) // Open
 			{
 				gripperClose.Set(false);
 				gripperOpen.Set(true);
 			}
-			else if (stick.GetRawButton(2))
+			else if (stick.GetRawButton(2)) // Down
 			{
 				liftUp.Set(false);
 				liftDown.Set(true);
 			}
-			else if (stick.GetRawButton(3))
+			else if (stick.GetRawButton(3)) // Up
 			{
 				liftUp.Set(true);
 				liftDown.Set(false);
