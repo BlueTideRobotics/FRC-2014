@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workbench version="2.0">
 <workbenchAdvisor/>
-<window height="1100" width="1820" x="238" y="51">
+<window height="1100" maximized="true" width="1820" x="-138" y="-17">
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="org.eclipse.ui.internal.introview"/>
 </fastViewData>
@@ -42,7 +42,7 @@
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="MyRobot.cpp" partName="MyRobot.cpp" path="C:/Users/Nicholas/Documents/GitHub/FRC-2013-2014/Bates Testbed (View Values)/SimpleTemplate/MyRobot.cpp" title="MyRobot.cpp" tooltip="SimpleTemplate/MyRobot.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SimpleTemplate/MyRobot.cpp"/>
-<editorState selectionHPixel="0" selectionLength="0" selectionOffset="477"/>
+<editorState selectionHPixel="0" selectionLength="0" selectionOffset="1521"/>
 </editor>
 </editors>
 <views>
@@ -300,8 +300,68 @@
 <item historyLabel="MyRobot.cpp" index="1">
 <position info="not_deleted" x="744" y="0"/>
 </item>
-<item active="true" historyLabel="MyRobot.cpp" index="1">
+<item historyLabel="MyRobot.cpp" index="1">
 <position info="not_deleted" x="475" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1269" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1928" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="254" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="195" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1351" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1928" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="598" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="492" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1645" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1685" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1618" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1842" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1821" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1464" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1477" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1499" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1518" y="0"/>
+</item>
+<item active="true" historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="1586" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
