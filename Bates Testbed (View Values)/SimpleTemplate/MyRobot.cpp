@@ -19,6 +19,18 @@ float potentiometerVoltCorrection(float volts)
 	}
 }
 
+float deadZone (float joystickVal)
+{
+	if(joystickVal<0.05&&joystickVal>-0.05)
+	{
+		return 0;
+	}
+	else
+	{
+		return joystickVal;
+	}
+}
+
 class RobotDemo : public SimpleRobot
 {	
 	Joystick stick;
@@ -53,27 +65,28 @@ public:
 
 	void OperatorControl(void)
 	{
-		float goodJoystick=0;
 		float servoSetVal=0;
+		float voltz;
 		while (IsOperatorControl())
 		{
-			
-			ultraSonic.Ping();
+			// Infrared sensor
 			SmartDashboard::PutBoolean("IR Sensor",irSensor.Get());
+			
+			// Limit switch
 			SmartDashboard::PutBoolean("Limit Switch", !limitSwitch.Get ());
+			
+			// Ultrasonic doesn't work
+			ultraSonic.Ping();
 			SmartDashboard::PutNumber("Ultra Sonic", ultraSonic.GetRangeInches());
 			SmartDashboard::PutBoolean("wubz",ultraSonic.IsRangeValid());
 			
-			float voltz = potentiometerVoltCorrection(potentiometer.GetAverageVoltage());
-			float angleDegrees = (voltz/5)*315;
+			// Poteniometer is slightly inaccurate towards high and low end
+			voltz = potentiometerVoltCorrection(potentiometer.GetAverageVoltage());
 			SmartDashboard::PutNumber("Potentiometer Voltage", voltz);
 			SmartDashboard::PutNumber("Actual Volts", potentiometer.GetAverageVoltage());
-			SmartDashboard::PutNumber("Potentiometer Angle", angleDegrees);
-			SmartDashboard::PutNumber("joystickVal",stick.GetX());
-			if(stick.GetX()<0.05&&stick.GetX()>-0.05)
-				goodJoystick=0;
-			else
-				goodJoystick=stick.GetX();
+			SmartDashboard::PutNumber("Potentiometer Angle", (voltz/5)*315);
+			
+			// Servo
 			if (stick.GetRawButton(1))
 			{
 				servoSetVal=0;
@@ -82,14 +95,17 @@ public:
 			{
 				servoSetVal=1;
 			}
-			servoSetVal+=(goodJoystick/300.0);
+			servoSetVal+=(deadZone(stick.GetX())/300.0);
 			if(servoSetVal>1)
+			{
 				servoSetVal=1;
-			if(servoSetVal<0)
+			}
+			else if(servoSetVal<0)
+			{
 				servoSetVal=0;
+			}
 			servo.Set(servoSetVal);
-			SmartDashboard::PutNumber("Servo",servoSetVal); 
-			
+			SmartDashboard::PutNumber("Servo",servoSetVal);
 		}
 	}
 	
