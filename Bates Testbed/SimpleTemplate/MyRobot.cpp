@@ -1,112 +1,111 @@
 // Nicholas Currault, 11/8/13
 
 #include "WPILib.h"
-#include "Solenoid.h"
+#include <Ultrasonic.h>
+
+float potentiometerVoltCorrection(float volts)
+{
+	if (volts < 0)
+	{
+		return 0.0;
+	}
+	else if (volts > 4.894)
+	{
+		return 5.0;
+	}
+	else
+	{
+		return volts;
+	}
+}
+
+float deadZone (float joystickVal)
+{
+	if(joystickVal<0.05&&joystickVal>-0.05)
+	{
+		return 0;
+	}
+	else
+	{
+		return joystickVal;
+	}
+}
 
 class RobotDemo : public SimpleRobot
-{
+{	
 	Joystick stick;
-	DigitalInput pressureInCylinder;
-	Relay *pneumaRelay;
-	
-	Solenoid liftUp;
-	Solenoid liftDown;
-	Solenoid gripperOpen;
-	Solenoid gripperClose;
+	DigitalInput irSensor;
+	DigitalInput limitSwitch;
 
-public:
+	Ultrasonic ultraSonic;
+	
+	AnalogChannel potentiometer;
+	
+	Servo servo;
+
+public: 
 	RobotDemo(void):
 		stick(1),
 		
-		liftUp(1),
-		liftDown(3),
-		gripperOpen(6),
-		gripperClose(8),
+		irSensor(5),
+		limitSwitch(10),
 		
-		pressureInCylinder(1)
-	 {
-		pneumaRelay = new Relay(1);//, Relay::kForwardOnly
+		ultraSonic(1,3),
+		
+		potentiometer(1),
+		
+		servo(10)
+	{
+			//leave this here
 	}
-
+	
 	void Autonomous(void)
 	{
 	}
 
 	void OperatorControl(void)
 	{
-		/*
-		 * Control Guide
-		 * 
-		 * Button 1: toggle relaySet
-		 * Button 2: move lift down
-		 * Button 3: move lift up
-		 * Button 4: close gripper
-		 * Button 5: open gripper
-		 */
-		
-		bool onePressed=false;
-		bool relaySet=false;
-		
-		// Initializing lift down
-		liftUp.Set(false);
-		liftDown.Set(true);
-		
-		//Initializing gripper open
-		gripperOpen.Set(true);
-		gripperClose.Set(false);
-		
+		float servoSetVal=0;
+		float voltz;
 		while (IsOperatorControl())
 		{
-			// Update Smart Dashboard values
-			SmartDashboard::PutBoolean("relaySet",relaySet);
-			SmartDashboard::PutBoolean("Pressa",pressureInCylinder.Get());
-			SmartDashboard::PutBoolean("Lift Up",liftUp.Get());
-			SmartDashboard::PutBoolean("Lift Down",liftDown.Get());
-			SmartDashboard::PutBoolean("Gripper Open",gripperOpen.Get());
-			SmartDashboard::PutBoolean("Gripper Close",gripperClose.Get());
+			// Infrared sensor
+			SmartDashboard::PutBoolean("IR Sensor",irSensor.Get());
 			
-			// Adjust relaySet based on button 1
-			if(stick.GetRawButton(1)&&!onePressed)
-			{
-				onePressed=true;
-				relaySet=!relaySet;
-			}
-			else if(!stick.GetRawButton(1))
-			{
-				onePressed=false;
-			}
+			// Limit switch
+			SmartDashboard::PutBoolean("Limit Switch", !limitSwitch.Get ());
 			
-			// Control relay using 'relaySet' and the pressure sensor.
-			if (relaySet&&!pressureInCylinder.Get())
-			{
-				pneumaRelay->Set(Relay::kForward);
-			}
-			else
-			{
-				pneumaRelay->Set(Relay::kOff);
-			}
+			// Ultrasonic doesn't work
+			ultraSonic.Ping();
+			SmartDashboard::PutNumber("Ultra Sonic", ultraSonic.GetRangeInches());
+			SmartDashboard::PutBoolean("wubz",ultraSonic.IsRangeValid());
 			
-			// Makes stuff move with solenoids
-			if(stick.GetRawButton(4)) // Close
+			// Poteniometer is slightly inaccurate towards high and low end
+			voltz = potentiometerVoltCorrection(potentiometer.GetAverageVoltage());
+			SmartDashboard::PutNumber("Potentiometer Voltage", voltz);
+			SmartDashboard::PutNumber("Actual Volts", potentiometer.GetAverageVoltage());
+			SmartDashboard::PutNumber("Potentiometer Angle", (voltz/5)*315);
+			
+			// Servo
+			if (stick.GetRawButton(1))
 			{
-				gripperClose.Set(true);
-				gripperOpen.Set(false);
+				servoSetVal=0;
 			}
-			else if(stick.GetRawButton(5)) // Open
+			else if (stick.GetRawButton(2))
 			{
-				gripperClose.Set(false);
-				gripperOpen.Set(true);
+				servoSetVal=1;
 			}
-			else if (stick.GetRawButton(2)) // Down
+			servoSetVal+=(deadZone(stick.GetX())/300.0);
+			if(servoSetVal>1)
 			{
-				liftUp.Set(false);
-				liftDown.Set(true);
+				servoSetVal=1;
 			}
-			else if (stick.GetRawButton(3)) // Up
+			else if(servoSetVal<0)
 			{
-				liftUp.Set(true);
-				liftDown.Set(false);
+				servoSetVal=0;
 			}
+			servo.Set(servoSetVal);
+			SmartDashboard::PutNumber("Servo",servoSetVal);
 		}
 	}
 	
