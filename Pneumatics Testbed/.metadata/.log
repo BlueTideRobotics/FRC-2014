@@ -1,0 +1,12 @@
+!SESSION 2013-12-05 16:07:53.598 -----------------------------------------------
+eclipse.buildId=20080514-1211
+java.version=1.5.0_11
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -data C:\Users\Nicholas\Documents\GitHub\FRC-2013-2014\Pneumatics Testbed -os win32 -ws win32 -arch x86
+
+!ENTRY com.windriver.ide.target 1 0 2013-12-05 16:08:06.620
+!MESSAGE C:\WindRiver\workbench-3.0\dfw\0199bb\x86-win32\bin\dfwserver.exe  -protocol mi -io sockets -useregistry -session dfw-wb301-Nicholas -registryhost localhost
+
+!ENTRY com.windriver.ide.target 1 0 2013-12-05 16:08:06.847
+!MESSAGE Connected to dfwserver at 127.0.0.1, 127.0.0.1:53428, PID=3628, Session="dfw-wb301-Nicholas"
