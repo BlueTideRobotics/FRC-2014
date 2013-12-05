@@ -2,6 +2,7 @@
 
 #include "WPILib.h"
 #include <Ultrasonic.h>
+#include <Gyro.h>
 
 float potentiometerVoltCorrection(float volts)
 {
@@ -40,11 +41,11 @@ class RobotDemo : public SimpleRobot
 	AnalogChannel sageAsked;
 	Ultrasonic ultraSonic;
 	
-	// AnalogChannel gyro;
-	
 	AnalogChannel potentiometer;
 	
 	Servo servo;
+	
+	Gyro gyro;
 
 public: 
 	RobotDemo(void):
@@ -57,7 +58,9 @@ public:
 		
 		potentiometer(1),
 		
-		servo(10)
+		servo(10),
+		
+		gyro(3)
 	{
 		ultraSonic.SetAutomaticMode(true);
 			//leave this here
@@ -82,9 +85,10 @@ public:
 			
 			// Ultrasonic doesn't work
 			ultraSonic.Ping();
-			SmartDashboard::PutBoolean("wubz",ultraSonic.IsRangeValid());
-			distance=(sageAsked.GetVoltage()*100000)/512;
-			SmartDashboard::PutNumber("Ultra Sonic (inches)",distance*(18/33.8));
+			// SmartDashboard::PutBoolean("wubz",ultraSonic.IsRangeValid());
+			distance = (sageAsked.GetVoltage()*100000)/512; // Sage did this
+			distance = distance*(18/33.8); // Convert to inches
+			SmartDashboard::PutNumber("Ultra Sonic (inches)", distance);
 			// servoSetVal=distance/120;
 			
 			// Poteniometer is slightly inaccurate towards high and low end
@@ -114,6 +118,8 @@ public:
 			servo.Set(servoSetVal);
 			SmartDashboard::PutNumber("Servo",servoSetVal);
 			
+			// Gyro
+			SmartDashboard::PutNumber("Gyro Angle",gyro.GetAngle());
 			
 		}
 	}
