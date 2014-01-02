@@ -22,7 +22,8 @@ float potentiometerVoltCorrection(float volts)
 
 float deadZone (float joystickVal)
 {
-	if(joystickVal<0.05&&joystickVal>-0.05)
+	double size=0.05;
+	if(joystickVal<size&&joystickVal>-size)
 	{
 		return 0;
 	}
