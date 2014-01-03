@@ -3,6 +3,7 @@
 #include "WPILib.h"
 #include <Ultrasonic.h>
 #include <Gyro.h>
+#include <DriverStationLCD.h>
 
 float potentiometerVoltCorrection(float volts)
 {
@@ -47,6 +48,7 @@ class RobotDemo : public SimpleRobot
 	Servo servo;
 	
 	Gyro gyro;
+	
 
 public: 
 	RobotDemo(void):
@@ -57,14 +59,14 @@ public:
 		sageAsked(2),
 		ultraSonic(1,2),
 		
-		potentiometer(1),
+		potentiometer(3),
 		
 		servo(10),
 		
-		gyro(3)
+		gyro(1)
 	{
 		ultraSonic.SetAutomaticMode(true);
-			//leave this here
+		gyro.Reset();
 	}
 	
 	void Autonomous(void)
@@ -74,8 +76,12 @@ public:
 	void OperatorControl(void)
 	{
 		float servoSetVal=0;
+		
+		
 		float voltz;
 		double distance=0;
+		
+		
 		while (IsOperatorControl())
 		{
 			// Infrared sensor
