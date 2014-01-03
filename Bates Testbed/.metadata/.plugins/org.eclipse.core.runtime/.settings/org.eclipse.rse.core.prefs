@@ -1,3 +1,5 @@
-#Thu Dec 05 16:01:18 MST 2013
+#Fri Jan 03 16:35:29 MST 2014
 eclipse.preferences.version=1
 org.eclipse.rse.systemtype.local.systemType.defaultUserId=Nicholas
+useridperkey=nicholas-mac.Local\=Nicholas;nicholas-mac.vxsim1_smp\=Driver Station;nicholas-mac.vxsim0\=Driver Station;nicholas-mac.VxWorks6x_10.28.40.2\=Driver Station;
+activeuserprofiles=FRC-2840_Driver;Team;nicholas-mac
