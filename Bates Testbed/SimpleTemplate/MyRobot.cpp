@@ -50,7 +50,7 @@ class RobotDemo : public SimpleRobot
 	Gyro gyro;
 	
 	CANJaguar leftMotor;
-	//CANJaguar rightMotor;
+	CANJaguar rightMotor;
 
 public: 
 	RobotDemo(void):
@@ -67,9 +67,8 @@ public:
 		
 		gyro(1),
 		
-		
-		leftMotor(1),
-		//rightMotor(2)
+		rightMotor(10),
+		leftMotor(11)
 		
 	{
 		ultraSonic.SetAutomaticMode(true);
@@ -87,7 +86,6 @@ public:
 		
 		float voltz;
 		double distance=0;
-		
 		
 		while (IsOperatorControl())
 		{
@@ -107,9 +105,8 @@ public:
 			
 			// Poteniometer is slightly inaccurate towards high and low end
 			voltz = potentiometerVoltCorrection(potentiometer.GetAverageVoltage());
-			SmartDashboard::PutNumber("Potentiometer Voltage", voltz);
-			SmartDashboard::PutNumber("Actual Volts", potentiometer.GetAverageVoltage());
-			SmartDashboard::PutNumber("Potentiometer Angle", (voltz/5)*315);
+			SmartDashboard::PutNumber("Potentiometer (Volts)", voltz);
+			SmartDashboard::PutNumber("Potentiometer (Degrees)", (voltz/5)*315);
 			
 			// Servo
 			if (stick.GetRawButton(1))
@@ -137,10 +134,9 @@ public:
 			SmartDashboard::PutNumber("Servo",servoSetVal);
 			
 			// Gyro
-			SmartDashboard::PutNumber("Gyro Angle",gyro.GetAngle());
+			SmartDashboard::PutNumber("Gyro",gyro.GetAngle());
 			
-			// Motors
-			
+			// Left motor
 			if (stick.GetRawButton(4))
 			{
 				leftMotor.Set(1);
@@ -149,7 +145,9 @@ public:
 			{
 				leftMotor.Set(0);
 			}
-			/*
+			SmartDashboard::PutNumber("Left Motor",leftMotor.Get());
+			
+			// Right motor
 			if (stick.GetRawButton(5))
 			{
 				rightMotor.Set(1);
@@ -158,7 +156,7 @@ public:
 			{
 				rightMotor.Set(0);
 			}
-			*/
+			SmartDashboard::PutNumber("Right Motor",rightMotor.Get());
 			
 			Wait(0.01);
 		}
