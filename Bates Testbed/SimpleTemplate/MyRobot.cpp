@@ -3,7 +3,7 @@
 #include "WPILib.h"
 #include <Ultrasonic.h>
 #include <Gyro.h>
-#include <DriverStationLCD.h>
+#include <CANJaguar.h>
 
 float potentiometerVoltCorrection(float volts)
 {
@@ -49,6 +49,8 @@ class RobotDemo : public SimpleRobot
 	
 	Gyro gyro;
 	
+	CANJaguar leftMotor;
+	//CANJaguar rightMotor;
 
 public: 
 	RobotDemo(void):
@@ -63,7 +65,12 @@ public:
 		
 		servo(10),
 		
-		gyro(1)
+		gyro(1),
+		
+		
+		leftMotor(1),
+		//rightMotor(2)
+		
 	{
 		ultraSonic.SetAutomaticMode(true);
 		gyro.Reset();
@@ -109,11 +116,15 @@ public:
 			{
 				servoSetVal=0;
 			}
-			else if (stick.GetRawButton(2))
+			else if (stick.GetRawButton(3)) // Hold down to gradually decrease servo val
 			{
-				servoSetVal=1;
+				servoSetVal += 0.01;
 			}
-			servoSetVal+=(deadZone(stick.GetX())/300.0);
+			else if (stick.GetRawButton(2)) // Hold down to gradually increase servo val
+			{
+				servoSetVal -= 0.01;
+			}
+			
 			if(servoSetVal>1)
 			{
 				servoSetVal=1;
@@ -128,6 +139,28 @@ public:
 			// Gyro
 			SmartDashboard::PutNumber("Gyro Angle",gyro.GetAngle());
 			
+			// Motors
+			
+			if (stick.GetRawButton(4))
+			{
+				leftMotor.Set(1);
+			}
+			else
+			{
+				leftMotor.Set(0);
+			}
+			/*
+			if (stick.GetRawButton(5))
+			{
+				rightMotor.Set(1);
+			}
+			else
+			{
+				rightMotor.Set(0);
+			}
+			*/
+			
+			Wait(0.01);
 		}
 	}
 	

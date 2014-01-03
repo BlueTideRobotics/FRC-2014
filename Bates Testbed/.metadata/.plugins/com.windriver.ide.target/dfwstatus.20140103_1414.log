@@ -1,0 +1,8 @@
+DFW status and trace log : Fri Jan 03 14:14:42 2014
+
+14:14:42.524 ERROR: Socket Error. API: recv, SessionId: 916, ReturnCode:  [SystemErrorCode=10054]: SocketHandler::Read
+  SevError(2) : sockethandler.cpp : 85
+14:14:42.526 ERROR: Socket Error. API: recv, SessionId: 916, ReturnCode:  [SystemErrorCode=10054]
+  SevError(2) : sockethandler.cpp : 85
+14:14:42.527 Operation succeeded: ShutdownServer
+  Reason: ERRNone  Severity: ERRSuccessful
