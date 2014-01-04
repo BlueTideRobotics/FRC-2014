@@ -31,7 +31,7 @@ else
 MODE_DIR := NonDebug
 endif
 OBJ_DIR := .
-WS_ROOT_DIR := C:/Users/Driver\ Station/Documents/GitHub/FRC-2013-2014/Bates\ Testbed
+WS_ROOT_DIR := C:/Users/Nicholas/Documents/GitHub/FRC-2013-2014/Bates\ Testbed
 PRJ_ROOT_DIR := $(WS_ROOT_DIR)/SimpleTemplate
 
 

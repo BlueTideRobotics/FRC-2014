@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="307" key="DIALOG_Y_ORIGIN"/>
+		<item value="397" key="DIALOG_X_ORIGIN"/>
+	</section>
 	<section name="WORKBENCH_SETTINGS">
 		<list key="ENABLED_TRANSFERS">
 		</list>
 	</section>
-	<section name="CleanDialogSettings">
-		<item key="DIALOG_X_ORIGIN" value="522"/>
-		<item key="DIALOG_HEIGHT" value="523"/>
-		<item key="DIALOG_Y_ORIGIN" value="224"/>
-		<item key="BUILD_NOW" value="true"/>
-		<item key="DIALOG_WIDTH" value="876"/>
-		<item key="TOGGLE_SELECTED" value="false"/>
+	<section name="org.eclipse.ui.views.problem">
 	</section>
 	<section name="NewWizardAction">
 	</section>
-	<section name="ChooseWorkspaceDialogSettings">
-		<item key="DIALOG_X_ORIGIN" value="397"/>
-		<item key="DIALOG_Y_ORIGIN" value="307"/>
-	</section>
-	<section name="org.eclipse.ui.views.problem">
+	<section name="CleanDialogSettings">
+		<item value="876" key="DIALOG_WIDTH"/>
+		<item value="true" key="BUILD_NOW"/>
+		<item value="true" key="BUILD_ALL"/>
+		<item value="224" key="DIALOG_Y_ORIGIN"/>
+		<item value="561" key="DIALOG_HEIGHT"/>
+		<item value="522" key="DIALOG_X_ORIGIN"/>
+		<item value="false" key="TOGGLE_SELECTED"/>
 	</section>
 </section>
