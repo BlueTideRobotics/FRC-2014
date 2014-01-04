@@ -109,15 +109,11 @@ public:
 			SmartDashboard::PutNumber("Potentiometer (Degrees)", (voltz/5)*315);
 			
 			// Servo
-			if (stick.GetRawButton(1))
-			{
-				servoSetVal=0;
-			}
-			else if (stick.GetRawButton(3)) // Hold down to gradually decrease servo val
+			if (stick.GetRawButton(3)) // Hold down to gradually decrease servo val
 			{
 				servoSetVal += 0.01;
 			}
-			else if (stick.GetRawButton(2)) // Hold down to gradually increase servo val
+			if (stick.GetRawButton(2)) // Hold down to gradually increase servo val
 			{
 				servoSetVal -= 0.01;
 			}
