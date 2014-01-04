@@ -1,0 +1,5 @@
+#Sat Jan 04 12:14:51 MST 2014
+eclipse.preferences.version=1
+org.eclipse.rse.systemtype.local.systemType.defaultUserId=Driver Station
+useridperkey=FRC-2840_Driver.VxWorks6x_10.28.40.2\=Driver Station;FRC-2840_Driver.vxsim1_smp\=Driver Station;FRC-2840_Driver.vxsim0\=Driver Station;
+activeuserprofiles=FRC-2840_Driver;Team
