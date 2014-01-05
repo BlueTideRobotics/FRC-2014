@@ -3,22 +3,22 @@ This file will show you view/modify a Jaguar's Board ID.
 Wiring--
 The computer should be connected with a USB-to-Serial cable to the port labled "IOIOI" on the Jaguar you wish to modify.
 (You can only do one at a time!)
-Plug the signal-reflector-thinamajig into the other port on the jaguar.
+Plug the terminating resistor into the other port on the jaguar.
 Diagram (display in a fixed-width font):
 
- /______________\                   /________________________\
- |              |                   |  |||||||   (V+)   (V-) |
- |              |                   |           \\\\\\\\\\\\\|
- |   Computer   |                   | IOIOI NET \\\\\\\\\\\\\|
- |              |                 ._|____[&]    \\\\\\\\\\\\\|
- \______________/                 | |           \\\\\\F\\\\\\|
-     USB->|&|                     | |   (LED)   \\\\\\R\\\\\\|
-           |___(USB-to-Serial)____| |           \\\\\\C\\\\\\|
-                                    |    NET    \\\\\\\\\\\\\|
-                                  .-|----[&]    \\\\\\\\\\\\\|
-                                  | |         . \\\\\\\\\\\\\|
-signal-reflector-thinamajig -> C--| |  |||||||   (M+)   (M-) |
-                                    \________________________/
+/______________\                   /________________________\
+|              |                   |  |||||||   (V+)   (V-) |
+|              |                   |           \\\\\\\\\\\\\|
+|   Computer   |                   | IOIOI NET \\\\\\\\\\\\\|
+|              |                 ._|____[&]    \\\\\\\\\\\\\|
+\______________/                 | |           \\\\\\F\\\\\\|
+    USB->|&|                     | |   (LED)   \\\\\\R\\\\\\|
+          |___(USB-to-Serial)____| |           \\\\\\C\\\\\\|
+                                   |    NET    \\\\\\\\\\\\\|
+                                 .-|----[&]    \\\\\\\\\\\\\|
+                                 | |         . \\\\\\\\\\\\\|
+      terminating resistor -> C--| |  |||||||   (M+)   (M-) |
+                                   \________________________/
 
 Software--
 The computer should have BDC-COMM installed. Open it after everything is connected.
