@@ -1,3 +1,4 @@
-#Thu Dec 05 16:09:09 MST 2013
+#Sat Jan 04 16:58:57 MST 2014
 eclipse.preferences.version=1
-org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<launchPerspectives/>\r\n
+preferredTargets=org.eclipse.cdt.debug.ui.toggleCBreakpointTarget,com.windriver.ide.debug.toggleBreakpointTarget\:com.windriver.ide.debug.toggleBreakpointTarget|
+org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<launchPerspectives/>\r\n

@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench version="2.0">
+<workbench progressCount="29" version="2.0">
 <workbenchAdvisor/>
-<window height="1100" width="1820" x="57" y="111">
+<window height="1100" maximized="true" width="1820" x="63" y="-15">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
 </perspectiveBar>
 <coolbarLayout locked="0">
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="163" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="255" y="22"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
 <coolItem id="com.windriver.analysis.windview.actionSet" itemType="typeToolBarContribution" x="61" y="22"/>
 <coolItem id="com.windriver.ide.target.ui.actionset.global" itemType="typeToolBarContribution" x="38" y="22"/>
-<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="159" y="22"/>
-<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="130" y="22"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="84" y="22"/>
+<coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="215" y="22"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="109" y="22"/>
+<coolItem id="org.eclipse.ui.WorkingSetActionSet" itemType="typeToolBarContribution" x="63" y="22"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="130" y="22"/>
+<coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="com.windriver.ide.target.ui.global.targettoolbar" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="viPlugin.actionSet" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="230" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="261" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.cdt.ui.editor.CEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
-<page focus="true" label="Workspace - Application Development">
+<page aggregateWorkingSetId="Aggregate for window 1388879653903" focus="true" label="Workspace - Advanced Device Development">
 <editors>
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
 </presentation>
@@ -40,12 +44,21 @@
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="MyRobot.cpp" partName="MyRobot.cpp" path="C:/Users/Nicholas/Documents/GitHub/FRC-2013-2014/Pneumatics Testbed/SimpleTemplate/MyRobot.cpp" title="MyRobot.cpp" tooltip="SimpleTemplate/MyRobot.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SimpleTemplate/MyRobot.cpp"/>
-<editorState selectionHPixel="0" selectionLength="0" selectionOffset="2450"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="193" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
-<view id="com.windriver.ide.debug.ui.osobjects.KOView" partName="Kernel Objects"/>
-<view id="org.eclipse.ui.views.TaskList" partName="Tasks"/>
+<view id="com.windriver.ide.ui.project.WRFileView" partName="File Navigator"/>
+<view id="org.eclipse.rse.ui.view.systemView" partName="Remote Systems">
+<viewState/>
+</view>
+<view id="org.eclipse.search.ui.views.SearchView" partName="Search">
+<viewState isPinned="false">
+<view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
+<view IMemento.internal.id="org.eclipse.cdt.ui.pdomSearchViewPage" definitionColumnWidth="150" locationColumnWidth="300" matchColumnWidth="300" org.eclipse.search.lastActivation="1" org.eclipse.search.resultpage.layout="2" showEnclosingDefinitions="true"/>
+</viewState>
+</view>
+<view id="org.eclipse.pde.runtime.LogView" partName="Error Log"/>
 <view id="com.windriver.ide.ui.build.WRBuildConsoleView" partName="Build Console">
 <viewState>
 <buildArgsViewState traceBuildRun="true">
@@ -53,27 +66,37 @@
 </buildArgsViewState>
 </viewState>
 </view>
-<view id="org.eclipse.ui.views.PropertySheet" partName="Properties"/>
-<view id="org.eclipse.pde.runtime.LogView" partName="Error Log"/>
-<view id="biz.junginger.newsfeed.eclipse.FeedView" partName="Feeds">
-<viewState/>
-</view>
-<view id="com.windriver.ide.ui.project.WRFileView" partName="File Navigator"/>
-<view id="org.eclipse.rse.ui.view.systemView" partName="Remote Systems">
-<viewState horizontalPosition="0" linkWithEditor="f" release="2.0.0" showFilterPools="f" verticalPosition="0"/>
-</view>
+<view id="org.eclipse.ui.views.TaskList" partName="Tasks"/>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
 </view>
-<view id="org.eclipse.ui.console.ConsoleView" partName="Console"/>
 <view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
-<viewState CommonNavigator.LINKING_ENABLED="0" CommonNavigator.LINKING_ENABLED.delayed="0" org.eclipse.cdt.ui.cview.groupincludes="true" org.eclipse.cdt.ui.editor.CUChildren="false" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
+<viewState CommonNavigator.LINKING_ENABLED="0" CommonNavigator.LINKING_ENABLED.delayed="0" org.eclipse.cdt.ui.cview.groupincludes="true" org.eclipse.cdt.ui.cview.groupmacros="false" org.eclipse.cdt.ui.editor.CUChildren="false" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0"/>
 </view>
-<view id="org.eclipse.ui.views.ProblemView" partName="Problems"/>
+<view id="org.eclipse.ui.views.PropertySheet" partName="Properties"/>
+<view id="biz.junginger.newsfeed.eclipse.FeedView" partName="Feeds">
+<viewState/>
+</view>
+<view id="org.eclipse.ui.views.ProblemView" partName="Problems">
+<viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
+<expanded>
+<category IMemento.internal.id="Warnings"/>
+<category IMemento.internal.id="Errors"/>
+</expanded>
+<columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.locationField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.markerType"/>
+</viewState>
+</view>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console"/>
+<view id="com.windriver.ide.debug.ui.osobjects.KOView" partName="Kernel Objects"/>
 </views>
 <perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="com.windriver.ide.perspective.ADE">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
-<descriptor class="com.windriver.ide.ui.ADEPerspectiveFactory" id="com.windriver.ide.perspective.ADE" label="Application Development"/>
+<descriptor class="com.windriver.ide.ui.ADEPerspectiveFactory" id="com.windriver.ide.perspective.ADE" label="Advanced Device Development"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
 <alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
@@ -83,22 +106,13 @@
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
 <alwaysOnActionSet id="org.eclipse.ui.WorkingSetActionSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
-<alwaysOnActionSet id="org.eclipse.update.ui.softwareUpdates"/>
 <alwaysOnActionSet id="com.windriver.ide.debug.ui.osobjects.actionSets"/>
-<alwaysOnActionSet id="com.windriver.ide.devcenter.internal.WROpenDevCenterActionSet"/>
 <alwaysOnActionSet id="com.windriver.ide.search.ui.actionSet"/>
-<alwaysOnActionSet id="com.windriver.ide.ui.internal.actions.WROpenDeveloperCenter"/>
-<alwaysOnActionSet id="com.windriver.ide.ui.internal.actions.WROpenOnlineSupport"/>
 <alwaysOnActionSet id="com.windriver.ide.ui.SetEmacsKeys"/>
-<alwaysOnActionSet id="viPlugin.actionSet"/>
 <alwaysOnActionSet id="org.eclipse.rse.core.search.searchActionSet"/>
 <alwaysOnActionSet id="edu.wpi.robotdeploymenttool"/>
-<alwaysOnActionSet id="com.windriver.ide.launch.WRLaunchActionSet"/>
 <alwaysOnActionSet id="org.eclipse.cdt.ui.CodingActionSet"/>
-<alwaysOnActionSet id="com.windriver.ide.staticanalysis.ui.NavigationActionSet"/>
 <alwaysOnActionSet id="org.eclipse.cdt.ui.OpenActionSet"/>
-<alwaysOnActionSet id="com.windriver.ide.target.ui.actionset.global"/>
-<alwaysOnActionSet id="com.windriver.ide.target.ui.rse.actionset.newconnection"/>
 <alwaysOnActionSet id="org.eclipse.ui.NavigateActionSet"/>
 <alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
 <alwaysOnActionSet id="com.windriver.ide.ui.help.feedback"/>
@@ -106,6 +120,12 @@
 <alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.presentation"/>
 <alwaysOnActionSet id="com.windriver.analysis.windview.actionSet"/>
 <alwaysOnActionSet id="com.windriver.analysis.eventreceive.actionSet"/>
+<alwaysOnActionSet id="com.windriver.ide.ui.internal.wwwLinksActionSet"/>
+<alwaysOnActionSet id="org.eclipse.cdt.ui.SearchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.cdt.ui.NavigationActionSet"/>
+<alwaysOnActionSet id="com.windriver.ide.common.ui.script"/>
+<alwaysOnActionSet id="com.windriver.ide.launch.run"/>
+<alwaysOnActionSet id="com.windriver.ide.launch.download"/>
 <show_view_action id="com.windriver.ide.debug.ui.osobjects.KOView"/>
 <show_view_action id="org.eclipse.rse.ui.view.systemView"/>
 <show_view_action id="org.eclipse.ui.navigator.ProjectExplorer"/>
@@ -176,6 +196,7 @@
 <view id="org.eclipse.ui.views.PropertySheet"/>
 <view id="com.windriver.ide.ui.build.WRBuildConsoleView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.search.ui.views.SearchView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <fastViewBars/>
 <layout>
@@ -186,7 +207,7 @@
 <page content="com.windriver.ide.ui.project.WRFileView" label="File Navigator"/>
 <page content="com.windriver.ide.ui.project.WRProjectView" label="LabelNotFound"/>
 <page content="com.windriver.ide.launch.ui.DebugSymbolBrowserView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
 </presentation>
@@ -197,7 +218,6 @@
 <page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33"/>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.2698324" ratioLeft="483" ratioRight="1307" relationship="2" relative="left"/>
@@ -210,7 +230,8 @@
 <page content="org.eclipse.ui.views.PropertySheet" label="Properties"/>
 <page content="com.windriver.ide.ui.build.WRBuildConsoleView" label="Build Console"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
@@ -218,13 +239,14 @@
 <part id="4"/>
 <part id="5"/>
 <part id="6"/>
+<part id="7"/>
 </presentation>
 </folder>
 </info>
 <info folder="true" part="right" ratio="0.72991586" ratioLeft="954" ratioRight="353" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 </presentation>
 </folder>
@@ -233,7 +255,7 @@
 <folder activePageID="org.eclipse.rse.ui.view.systemView" appearance="2" expanded="2">
 <page content="org.eclipse.rse.ui.view.systemView" label="Remote Systems"/>
 <page content="com.windriver.ide.debug.ui.osobjects.KOView" label="Kernel Objects"/>
-<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
 </presentation>
@@ -250,6 +272,27 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/SimpleTemplate/MyRobot.cpp"/>
 </editors>
 <item historyLabel="Getting Started Resources" index="0"/>
+<item historyLabel="MyRobot.cpp" index="1">
+<position/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="2450" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position/>
+</item>
 <item active="true" historyLabel="MyRobot.cpp" index="1">
 <position/>
 </item>
