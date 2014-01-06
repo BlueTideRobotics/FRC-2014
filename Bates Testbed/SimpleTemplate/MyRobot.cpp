@@ -5,22 +5,6 @@
 #include <Gyro.h>
 #include <CANJaguar.h>
 
-float potentiometerVoltCorrection(float volts)
-{
-	if (volts < 0)
-	{
-		return 0.0;
-	}
-	else if (volts > 4.894)
-	{
-		return 5.0;
-	}
-	else
-	{
-		return volts;
-	}
-}
-
 float deadZone (float joystickVal)
 {
 	double size=0.05;
@@ -36,6 +20,9 @@ float deadZone (float joystickVal)
 
 class RobotDemo : public SimpleRobot
 {	
+	CANJaguar rightMotor;
+	CANJaguar leftMotor;
+	
 	Joystick stick;
 	DigitalInput irSensor;
 	DigitalInput limitSwitch;
@@ -49,11 +36,14 @@ class RobotDemo : public SimpleRobot
 	
 	Gyro gyro;
 	
-	CANJaguar leftMotor;
-	CANJaguar rightMotor;
+	ADXL345_I2C accel;
+	
 
 public: 
 	RobotDemo(void):
+		rightMotor(10),
+		leftMotor(11),
+		
 		stick(1),
 		
 		irSensor(5),
@@ -67,10 +57,10 @@ public:
 		
 		gyro(1),
 		
-		rightMotor(10),
-		leftMotor(11)
-		
+		accel(1,ADXL345_I2C::kRange_2G)
 	{
+		rightMotor.ConfigEncoderCodesPerRev(250);
+		rightMotor.SetSpeedReference(CANJaguar::kSpeedRef_Encoder);
 		ultraSonic.SetAutomaticMode(true);
 		gyro.Reset();
 	}
@@ -81,11 +71,20 @@ public:
 
 	void OperatorControl(void)
 	{
-		float servoSetVal=0;
+		// For servo
+		double servoSetVal=0;
 		
+		// For potentiometer
+		double potentiometerDeg;
+		double potentiometerV;
 		
-		float voltz;
-		double distance=0;
+		// For ultra-sonic sensor
+		double ultraDistance;
+		
+		// For accelerometer;
+		double accelX;
+		double accelY;
+		double accelZ;
 		
 		while (IsOperatorControl())
 		{
@@ -98,31 +97,31 @@ public:
 			// Ultrasonic doesn't work
 			ultraSonic.Ping();
 			// SmartDashboard::PutBoolean("wubz",ultraSonic.IsRangeValid());
-			distance = (sageAsked.GetVoltage()*100000)/512; // Sage did this
-			distance = distance*(18/33.8); // Convert to inches
-			SmartDashboard::PutNumber("Ultra Sonic (inches)", distance);
-			// servoSetVal=distance/120;
+			ultraDistance = (sageAsked.GetVoltage()*100000)/512; // Sage did this
+			ultraDistance = ultraDistance*(18/33.8); // Convert to inches
+			SmartDashboard::PutNumber("Ultra Sonic (inches)", ultraDistance);
 			
-			// Poteniometer is slightly inaccurate towards high and low end
-			voltz = potentiometerVoltCorrection(potentiometer.GetAverageVoltage());
-			SmartDashboard::PutNumber("Potentiometer (Volts)", voltz);
-			SmartDashboard::PutNumber("Potentiometer (Degrees)", (voltz/5)*315);
+			// Poteniometer is slightly inaccurate towards high and low end; adding 0.052 is a compromise (neither end is VERY off) 
+			potentiometerV = potentiometer.GetAverageVoltage();
+			potentiometerDeg = ((potentiometer.GetAverageVoltage()+0.052) / 5.0) * 315;
+			SmartDashboard::PutNumber("Potentiometer (Volts)", potentiometerV);
+			SmartDashboard::PutNumber("Potentiometer (Approx. Degrees)", potentiometerDeg);
 			
 			// Servo
 			if (stick.GetRawButton(3)) // Hold down to gradually decrease servo val
 			{
-				servoSetVal += 0.01;
+				servoSetVal += 0.1;
 			}
 			if (stick.GetRawButton(2)) // Hold down to gradually increase servo val
 			{
-				servoSetVal -= 0.01;
+				servoSetVal -= 0.1;
 			}
 			
 			if(servoSetVal>1)
 			{
 				servoSetVal=1;
 			}
-			else if(servoSetVal<0)
+			if(servoSetVal<0)
 			{
 				servoSetVal=0;
 			}
@@ -132,27 +131,26 @@ public:
 			// Gyro
 			SmartDashboard::PutNumber("Gyro",gyro.GetAngle());
 			
+			// Accelerometer
+			accelX = accel.GetAcceleration(ADXL345_I2C::kAxis_X);
+			accelY = accel.GetAcceleration(ADXL345_I2C::kAxis_Y);
+			accelZ = accel.GetAcceleration(ADXL345_I2C::kAxis_Z);
+			SmartDashboard::PutNumber("Accelerometer: X-axis",accelX);
+			SmartDashboard::PutNumber("Accelerometer: Y-axis",accelY);
+			SmartDashboard::PutNumber("Accelerometer: Z-axis",accelZ);
+			
 			// Left motor
-			if (stick.GetRawButton(4))
-			{
-				leftMotor.Set(1);
-			}
-			else
-			{
-				leftMotor.Set(0);
-			}
-			SmartDashboard::PutNumber("Left Motor",leftMotor.Get());
+			leftMotor.Set(stick.GetY());
+			SmartDashboard::PutNumber("L Motor: output-value",leftMotor.Get());
 			
 			// Right motor
-			if (stick.GetRawButton(5))
-			{
-				rightMotor.Set(1);
-			}
-			else
-			{
-				rightMotor.Set(0);
-			}
-			SmartDashboard::PutNumber("Right Motor",rightMotor.Get());
+			rightMotor.Set(stick.GetX());
+			SmartDashboard::PutNumber("R Motor: output-value",rightMotor.Get());
+			
+			// Right optical encoder
+			SmartDashboard::PutNumber("R Motor: speed", rightMotor.GetSpeed());
+			//SmartDashboard::PutNumber("R Motor: position",rightMotor.GetPosition());
+			
 			
 			Wait(0.01);
 		}

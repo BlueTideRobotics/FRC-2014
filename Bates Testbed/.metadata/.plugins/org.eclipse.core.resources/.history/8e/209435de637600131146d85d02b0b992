@@ -1,0 +1,154 @@
+// Nicholas Currault, 1/3/14
+
+#include "WPILib.h"
+#include <Ultrasonic.h>
+#include <Gyro.h>
+#include <CANJaguar.h>
+
+float deadZone (float joystickVal)
+{
+	double size=0.05;
+	if(joystickVal<size&&joystickVal>-size)
+	{
+		return 0;
+	}
+	else
+	{
+		return joystickVal;
+	}
+}
+
+class RobotDemo : public SimpleRobot
+{	
+	CANJaguar rightMotor;
+	CANJaguar leftMotor;
+	
+	Joystick stick;
+	DigitalInput irSensor;
+	DigitalInput limitSwitch;
+
+	AnalogChannel sageAsked;
+	Ultrasonic ultraSonic;
+	
+	AnalogChannel potentiometer;
+	
+	Servo servo;
+	
+	Gyro gyro;
+	
+	ADXL345_I2C accel;
+	
+
+public: 
+	RobotDemo(void):
+		rightMotor(10),
+		leftMotor(11),
+		
+		stick(1),
+		
+		irSensor(5),
+		limitSwitch(10),
+		sageAsked(2),
+		ultraSonic(1,2),
+		
+		potentiometer(3),
+		
+		servo(10),
+		
+		gyro(1),
+		
+		accel(1,ADXL345_I2C.DataFormat_Range.k2G)
+	{
+		rightMotor.ConfigEncoderCodesPerRev(250);
+		rightMotor.SetSpeedReference(CANJaguar::kSpeedRef_Encoder);
+		ultraSonic.SetAutomaticMode(true);
+		gyro.Reset();
+	}
+	
+	void Autonomous(void)
+	{
+	}
+
+	void OperatorControl(void)
+	{
+		float servoSetVal=0;
+		
+		
+		double distance=0;
+		
+		while (IsOperatorControl())
+		{
+			// Infrared sensor
+			SmartDashboard::PutBoolean("IR Sensor",irSensor.Get());
+			
+			// Limit switch
+			SmartDashboard::PutBoolean("Limit Switch", !limitSwitch.Get ());
+			
+			// Ultrasonic doesn't work
+			ultraSonic.Ping();
+			// SmartDashboard::PutBoolean("wubz",ultraSonic.IsRangeValid());
+			distance = (sageAsked.GetVoltage()*100000)/512; // Sage did this
+			distance = distance*(18/33.8); // Convert to inches
+			SmartDashboard::PutNumber("Ultra Sonic (inches)", distance);
+			
+			// Poteniometer is slightly inaccurate towards high and low end; adding 0.052 is a compromise (neither end is VERY off) 
+			SmartDashboard::PutNumber("Potentiometer (Volts)", potentiometer.GetAverageVoltage());
+			SmartDashboard::PutNumber("Potentiometer (Approx. Degrees)", ((potentiometer.GetAverageVoltage()+0.052) /5.0)*315);
+			
+			
+			// Servo
+			if (stick.GetRawButton(3)) // Hold down to gradually decrease servo val
+			{
+				servoSetVal += 0.1;
+			}
+			if (stick.GetRawButton(2)) // Hold down to gradually increase servo val
+			{
+				servoSetVal -= 0.1;
+			}
+			
+			if(servoSetVal>1)
+			{
+				servoSetVal=1
+						;
+			}
+			if(servoSetVal<0)
+			{
+				servoSetVal=0;
+			}
+			servo.Set(servoSetVal);
+			SmartDashboard::PutNumber("Servo",servoSetVal);
+			
+			// Gyro
+			SmartDashboard::PutNumber("Gyro",gyro.GetAngle());
+			
+			// Accelerometer
+			double tiltX=accel.getAcceleration(ADXL345_I2C.Axes.kX);
+			
+			SmartDashboard::PutNumber("Accel: X-tilt",tiltX);
+			// Left motor
+			leftMotor.Set(stick.GetY());
+			SmartDashboard::PutNumber("L Motor: output-value",leftMotor.Get());
+			
+			// Right motor
+			rightMotor.Set(stick.GetX());
+			SmartDashboard::PutNumber("R Motor: output-value",rightMotor.Get());
+			
+			// Right optical encoder
+			SmartDashboard::PutNumber("R Motor: speed", rightMotor.GetSpeed());
+			//SmartDashboard::PutNumber("R Motor: position",rightMotor.GetPosition());
+			
+			
+			Wait(0.01);
+		}
+	}
+	
+	/**
+	 * Runs during test mode
+	 */
+	void Test() {
+
+	}
+};
+
+START_ROBOT_CLASS(RobotDemo);
+

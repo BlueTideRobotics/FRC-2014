@@ -1,0 +1,17 @@
+DFW status and trace log : Sat Jan 04 16:15:12 2014
+
+16:15:12.699 ERROR: no id specified
+  SevError(2) : programcontext.cpp : 5450
+16:15:12.725 ERROR: target definition defaultTarget has not been created
+  Protocol Component : SevError(2) : targetdefinitionmanager.cpp : 5122
+DFW status and trace log : Sat Jan 04 16:15:19 2014
+
+16:15:19.570 ERROR: Socket Error. API: recv, SessionId: 800, ReturnCode:  [SystemErrorCode=10054]: SocketHandler::Read
+  Protocol Component : SevError(2) : sockethandler.cpp : 102
+16:15:19.571 ERROR: Socket Error. API: recv, SessionId: 800, ReturnCode:  [SystemErrorCode=10054]
+  Protocol Component : SevError(2) : sockethandler.cpp : 102
+16:15:19.571 ERROR: target definition defaultTarget has not been created
+  Protocol Component : SevError(2) : targetdefinitionmanager.cpp : 5122
+16:15:19.571 Operation succeeded: ShutdownServer
+  Reason: ERRNone  Severity: ERRSuccessful16:15:19.571 ERROR: target definition defaultTarget has not been created
+  Protocol Component : SevError(2) : targetdefinitionmanager.cpp : 5122

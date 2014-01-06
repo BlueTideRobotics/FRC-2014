@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workbench progressCount="29" version="2.0">
 <workbenchAdvisor/>
-<window height="788" maximized="true" width="1386" x="-9" y="-13">
+<window height="788" maximized="true" width="1386" x="233" y="-30">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -27,7 +27,7 @@
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
-<page focus="true" label="Workspace - Advanced Device Development">
+<page aggregateWorkingSetId="Aggregate for window 1388960522154" focus="true" label="Workspace - Advanced Device Development">
 <editors>
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
@@ -44,7 +44,7 @@
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="MyRobot.cpp" partName="MyRobot.cpp" path="C:/Users/Nicholas/Documents/GitHub/FRC-2013-2014/Bates Testbed/SimpleTemplate/MyRobot.cpp" title="MyRobot.cpp" tooltip="SimpleTemplate/MyRobot.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SimpleTemplate/MyRobot.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3072" selectionTopPixel="2371"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1916" selectionTopPixel="938"/>
 </editor>
 </editors>
 <views>
@@ -60,12 +60,17 @@
 <viewState/>
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
-<viewState columnWidth0="250" columnWidth1="75" columnWidth2="150" columnWidth3="60" columnWidth4="0" horizontalPosition="0" verticalPosition="0">
-<columnOrder columnOrderIndex="0"/>
-<columnOrder columnOrderIndex="1"/>
-<columnOrder columnOrderIndex="2"/>
-<columnOrder columnOrderIndex="3"/>
-<columnOrder columnOrderIndex="4"/>
+<viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
+<expanded>
+<category IMemento.internal.id="Errors"/>
+<category IMemento.internal.id="Warnings"/>
+</expanded>
+<columnWidths org.eclipse.ui.ide.locationField="0" org.eclipse.ui.ide.markerType="0" org.eclipse.ui.ide.pathField="0" org.eclipse.ui.ide.resourceField="0" org.eclipse.ui.ide.severityAndDescriptionField="0"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.locationField"/>
+<visible IMemento.internal.id="org.eclipse.ui.ide.markerType"/>
 </viewState>
 </view>
 <view id="org.eclipse.ui.console.ConsoleView" partName="Console"/>
@@ -281,8 +286,29 @@
 <item historyLabel="MyRobot.cpp" index="1">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item active="true" historyLabel="MyRobot.cpp" index="1">
+<item historyLabel="MyRobot.cpp" index="1">
 <position info="not_deleted" x="0" y="3072"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="3679" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="3422" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="3424" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="2706" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="3294" y="0"/>
+</item>
+<item active="true" historyLabel="MyRobot.cpp" index="1">
+<position info="not_deleted" x="857" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
