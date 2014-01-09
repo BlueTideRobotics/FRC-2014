@@ -1,3 +1,3 @@
-#Sat Jan 04 12:14:51 MST 2014
+#Thu Jan 09 15:35:48 MST 2014
 eclipse.preferences.version=1
-org.eclipse.rse.preferences.order.connections=FRC-2840_Driver.Local;FRC-2840_Driver.vxsim0;FRC-2840_Driver.vxsim1_smp;FRC-2840_Driver.VxWorks6x_10.28.40.2
+org.eclipse.rse.preferences.order.connections=FRC-2840_Driver.Local;FRC-2840_Driver.VxWorks6x_10.28.40.2;FRC-2840_Driver.vxsim0;FRC-2840_Driver.vxsim1_smp

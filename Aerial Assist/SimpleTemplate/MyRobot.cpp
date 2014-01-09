@@ -9,14 +9,28 @@
 class RobotDemo : public SimpleRobot
 {
 	RobotDrive myRobot; // robot drive system
+	CANJaguar frontLeft;
+	CANJaguar frontRight;
+	CANJaguar backRight;
+	CANJaguar backLeft;
 	Joystick stick; // only joystick
 
 public:
 	RobotDemo(void):
-		myRobot(1, 2),	// these must be initialized in the same order
+		
+		frontLeft(14),
+		backLeft(15),
+		frontRight(11),
+		backRight(10),
+		myRobot(frontLeft, backLeft, frontRight, backRight),	// these must be initialized in the same order
 		stick(1)		// as they are declared above.
 	{
 		myRobot.SetExpiration(0.1);
+		
+		backLeft.ConfigEncoderCodesPerRev(250);
+		backLeft.SetSpeedReference(CANJaguar::kSpeedRef_Encoder);
+		backRight.ConfigEncoderCodesPerRev(250);
+		backRight.SetSpeedReference(CANJaguar::kSpeedRef_Encoder);
 	}
 
 	/**
