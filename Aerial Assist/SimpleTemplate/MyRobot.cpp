@@ -9,18 +9,6 @@
  * the driver station or the field controls.
  */ 
 
-double fabs(double n)
-{
-	if (n>=0)
-	{
-		return n;
-	}
-	else
-	{
-		return -n;
-	}
-}
-
 class RobotDemo : public SimpleRobot
 {
 	Timer autonTimer;
@@ -48,10 +36,8 @@ public:
 		driveRightPID(0,0,0,100,100)
 		
 	{
-		/*
 		backLeft.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
 		backRight.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
-		*/
 		backRight.SetPositionReference(CANJaguar::kPosRef_QuadEncoder);
 		backLeft.SetPositionReference(CANJaguar::kPosRef_QuadEncoder);
 		
@@ -88,7 +74,12 @@ public:
 			
 			myRobot.Drive(stick.GetY(),0.0); // drive straight
 			
-			distance = 18.84955592153876 * fabs(backLeft.GetPosition() - origPos);
+			SmartDashboard::PutNumber("Position",backLeft.GetPosition());
+			SmartDashboard::PutNumber("Speed",backLeft.GetSpeed());
+			
+			// distance = 18.84955592153876 * fabs(backLeft.GetPosition() - origPos);
+			distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
+			
 			SmartDashboard::PutNumber("Distance",distance);
 			
 			if (stick.GetRawButton(1))
