@@ -8,6 +8,19 @@
  * Autonomous and OperatorControl methods at the right time as controlled by the switches on
  * the driver station or the field controls.
  */ 
+
+double fabs(double n)
+{
+	if (n>=0)
+	{
+		return n;
+	}
+	else
+	{
+		return -n;
+	}
+}
+
 class RobotDemo : public SimpleRobot
 {
 	Timer autonTimer;
@@ -56,15 +69,6 @@ public:
 		autonTimer.Start();
 		// bool isHot = true;
 		
-		double distanceTravelled = 0;
-		while (autonTimer.Get() < 5)
-		{
-			myRobot.Drive(-0.5,0.0);
-			distanceTravelled = 18.85 * ((backRight.GetPosition()+backLeft.GetPosition())/2.0);
-			SmartDashboard::PutNumber("Distance",distanceTravelled); 
-		}
-		myRobot.Drive(0.0,0.0);
-		
 	}
 
 	/**
@@ -73,15 +77,24 @@ public:
 	void OperatorControl(void)
 	{
 		myRobot.SetSafetyEnabled(true);
+		double distance = 0;
+		double origPos;
+		
+		origPos = backLeft.GetPosition();
+		
 		while (IsOperatorControl())
 		{
-			myRobot.ArcadeDrive(stick); // drive with arcade style (use right stick)
+			// myRobot.ArcadeDrive(-stick); // drive with arcade style (use right stick)
 			
-			distanceTravelled = 18.85 * ((backRight.GetPosition()+backLeft.GetPosition())/2.0);
-			SmartDashboard::PutNumber("Distance",distanceTravelled);
-			SmartDashboard::PutNumber("Distance R",distanceTravelled);
-			SmartDashboard::PutNumber("Distance L",distanceTravelled);
+			myRobot.Drive(stick.GetY(),0.0); // drive straight
 			
+			distance = 18.84955592153876 * fabs(backLeft.GetPosition() - origPos);
+			SmartDashboard::PutNumber("Distance",distance);
+			
+			if (stick.GetRawButton(1))
+			{
+				origPos = backLeft.GetPosition();
+			}
 			
 			Wait(0.005);				// wait for a motor update time
 		}

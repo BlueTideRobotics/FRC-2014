@@ -39,9 +39,6 @@ class RobotDemo : public SimpleRobot
 	
 	ADXL345_I2C accel;
 	
-	HSLImage *targetImage;
-	AxisCamera &cam;
-	
 
 public: 
 	RobotDemo(void):
@@ -66,9 +63,6 @@ public:
 		rightMotor.ConfigEncoderCodesPerRev(250);
 		rightMotor.SetSpeedReference(CANJaguar::kSpeedRef_Encoder);
 		ultraSonic.SetAutomaticMode(true);
-		cam=AxisCamera::GetInstance();
-		cam.WriteResolution(k160x120);
-		cam.WriteBrightness(0);
 		gyro.Reset();
 	}
 	
@@ -95,12 +89,7 @@ public:
 		
 		while (IsOperatorControl())
 		{
-			//CameraShit
-			targetImage=cam.GetImage();
-			Threshold targetThreshold(50,150,30,130,110,220);
-			BinaryImage *goodTargetImage=targetImage->ThresholdHSL(targetThreshhold);
-			ParticleAnalysisReport particle=goodTargetImage->GetParticleAnalysisReport(1);
-			
+
 			// Infrared sensor
 			SmartDashboard::PutBoolean("IR Sensor",irSensor.Get());
 			
