@@ -62,24 +62,27 @@ public:
 		{
 			distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
 			
-			if (autonTimer.Get() < 3) // Drive forward
+			SmartDashboard::PutNumber("Timer",autonTimer.Get());
+			SmartDashboard::PutNumber("Distance", distance);
+			
+			if (autonTimer.Get() < 1.5) // Drive forward
 			{
 				myRobot.Drive(-0.5,0.0);
 			}
 			
 			if (isHot)
 			{
-				if (autonTimer.Get() > 3 && autonTimer.Get()<5) // Turn right
+				if (autonTimer.Get() > 1.5 && autonTimer.Get() < 3) // Turn right
 				{
 					myRobot.Drive(0.3,1.0);
 				}
 				
-				if (autonTimer.Get() > 5 && autonTimer.Get()<5.1) // Stop
+				if (autonTimer.Get() > 3 && autonTimer.Get()<3.1) // Stop
 				{
 					myRobot.Drive(0.0,0.0);
 				}
 				
-				if (autonTimer.Get() > 5.1 && autonTimer.Get() < 8) // Move forward
+				if (autonTimer.Get() > 3.1 && autonTimer.Get() < 4) // Move forward
 				{
 					myRobot.Drive(-0.5,0.0);
 				}

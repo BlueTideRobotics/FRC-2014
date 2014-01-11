@@ -38,7 +38,7 @@
 </editorArea>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="MyRobot.cpp" partName="MyRobot.cpp" path="C:/Users/Nicholas/Documents/GitHub/FRC-2013-2014/Aerial Assist/SimpleTemplate/MyRobot.cpp" title="MyRobot.cpp" tooltip="SimpleTemplate/MyRobot.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SimpleTemplate/MyRobot.cpp"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1464" selectionTopPixel="1008"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1414" selectionTopPixel="939"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="PID.cpp" partName="PID.cpp" path="C:/Users/Nicholas/Documents/GitHub/FRC-2013-2014/Aerial Assist/SimpleTemplate/PID.cpp" title="PID.cpp" tooltip="SimpleTemplate/PID.cpp" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SimpleTemplate/PID.cpp"/>
@@ -449,9 +449,6 @@
 <position info="not_deleted" x="0" y="0"/>
 </item>
 <item historyLabel="MyRobot.cpp" index="0">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MyRobot.cpp" index="0">
 <position info="not_deleted" x="596" y="0"/>
 </item>
 <item historyLabel="MyRobot.cpp" index="0">
@@ -586,8 +583,17 @@
 <item historyLabel="MyRobot.cpp" index="0">
 <position/>
 </item>
-<item active="true" historyLabel="MyRobot.cpp" index="0">
+<item historyLabel="MyRobot.cpp" index="0">
 <position info="not_deleted" x="2304" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="0">
+<position info="not_deleted" x="1671" y="0"/>
+</item>
+<item historyLabel="MyRobot.cpp" index="0">
+<position info="not_deleted" x="1727" y="0"/>
+</item>
+<item active="true" historyLabel="MyRobot.cpp" index="0">
+<position info="not_deleted" x="1725" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
