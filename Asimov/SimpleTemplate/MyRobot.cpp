@@ -59,6 +59,8 @@ class RobotDemo : public SimpleRobot
 	Servo cameraPivotAxis,cameraTiltAxis;
 	Joystick cameraStick;
 	Solenoid shifterIn, shifterOut, ballGrab, ballDrop;
+	
+	CANJaguar forkliftArms;
 
 public:
 	RobotDemo(void):
@@ -81,7 +83,9 @@ public:
 		shifterOut(4),
 		
 		ballGrab(1),
-		ballDrop(2)
+		ballDrop(2),
+		
+		forkliftArms(13)
 	{
 		timer.Start();
 		/*backLeft.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
@@ -132,6 +136,18 @@ public:
 		ballGrab.Set(false);
 		while (IsOperatorControl())
 		{	
+			if (stick.GetRawButton(3))
+			{
+				forkliftArms.Set(0.1);
+			}
+			else if (stick.GetRawButton(4))
+			{
+				forkliftArms.Set(-0.1);
+			}
+			else
+			{
+				forkliftArms.Set(0.0);
+			}
 			
 			/*rightEncoder=fabs(backRight.GetSpeed())*-negative(backRight.Get());
 						leftEncoder=backLeft.GetSpeed();*/
