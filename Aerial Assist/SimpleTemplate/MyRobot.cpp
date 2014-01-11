@@ -86,6 +86,10 @@ public:
 			{
 				origPos = backLeft.GetPosition();
 			}
+			if (stick.GetRawButton(5))
+			{
+				myRobot.Drive(1.0,1.0);
+			}
 			
 			Wait(0.005);				// wait for a motor update time
 		}
