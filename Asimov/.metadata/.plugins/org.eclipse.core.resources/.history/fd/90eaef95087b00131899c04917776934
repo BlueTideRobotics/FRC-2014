@@ -138,11 +138,11 @@ public:
 		{	
 			if (stick.GetRawButton(3))
 			{
-				forkliftArms.Set(0.05);
+				forkliftArms.Set(0.1);
 			}
 			else if (stick.GetRawButton(4))
 			{
-				forkliftArms.Set(-0.05);
+				forkliftArms.Set(-0.1);
 			}
 			else
 			{
