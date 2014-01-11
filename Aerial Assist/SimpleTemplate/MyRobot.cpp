@@ -53,7 +53,59 @@ public:
 	void Autonomous(void)
 	{
 		autonTimer.Start();
-		// bool isHot = true;
+		
+		bool isHot = true;
+		double distance = 0;
+		double origPos = backLeft.GetPosition();
+		
+		while(IsAutonomous())
+		{
+			distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
+			
+			if (autonTimer.Get() < 3) // Drive forward
+			{
+				myRobot.Drive(-0.5,0.0);
+			}
+			
+			if (isHot)
+			{
+				if (autonTimer.Get() > 3 && autonTimer.Get()<5) // Turn right
+				{
+					myRobot.Drive(0.3,1.0);
+				}
+				
+				if (autonTimer.Get() > 5 && autonTimer.Get()<5.1) // Stop
+				{
+					myRobot.Drive(0.0,0.0);
+				}
+				
+				if (autonTimer.Get() > 5.1 && autonTimer.Get() < 8) // Move forward
+				{
+					myRobot.Drive(-0.5,0.0);
+				}
+				
+				if (autonTimer.Get() > 8 && autonTimer.Get() < 10) // Turn left
+				{
+					myRobot.Drive(0.3,-1.0);
+				}
+				if (autonTimer.Get() > 10) // End of autonomous; stop.
+				{
+					myRobot.Drive(0.0,0.0);
+				}
+			}
+			else
+			{
+				if (autonTimer.Get() > 3 && autonTimer.Get() < 5) // Turn right
+				{
+					myRobot.Drive(0.3,1.0);
+				}
+				if (autonTimer.Get() > 5) // We're done!
+				{
+					myRobot.Drive(0.0,0.0);
+				}
+			}
+		}
+			
 		
 	}
 
@@ -64,9 +116,7 @@ public:
 	{
 		myRobot.SetSafetyEnabled(true);
 		double distance = 0;
-		double origPos;
-		
-		origPos = backLeft.GetPosition();
+		double origPos = backLeft.GetPosition();
 		
 		while (IsOperatorControl())
 		{
@@ -89,6 +139,10 @@ public:
 			if (stick.GetRawButton(5))
 			{
 				myRobot.Drive(1.0,1.0);
+			}
+			if (stick.GetRawButton(4))
+			{
+				myRobot.Drive(1.0,-1.0);
 			}
 			
 			Wait(0.005);				// wait for a motor update time
