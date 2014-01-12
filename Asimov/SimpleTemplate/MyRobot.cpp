@@ -58,9 +58,12 @@ class RobotDemo : public SimpleRobot
 	Timer turnTime;
 	Servo cameraPivotAxis,cameraTiltAxis;
 	Joystick cameraStick;
-	Solenoid shifterIn, shifterOut, ballGrab, ballDrop;
+	Solenoid shifterIn, shifterOut;
 	
-	CANJaguar forkliftArms;
+	CANJaguar ballLiftL;
+	CANJaguar ballLiftR;
+	
+	CANJaguar ballGrab;
 
 public:
 	RobotDemo(void):
@@ -82,10 +85,10 @@ public:
 		shifterIn(5),
 		shifterOut(4),
 		
-		ballGrab(1),
-		ballDrop(2),
+		ballGrab(13),
 		
-		forkliftArms(13)
+		ballLiftL(15),
+		ballLiftR(16)
 	{
 		timer.Start();
 		/*backLeft.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
@@ -128,41 +131,61 @@ public:
 		float cameraTilt=0.677;
 		bool shiftPos=true;
 		bool shiftPosDown=false;
+		double power = 0.5;
 		
 		// Initial pneumatic states
 		shifterIn.Set(true);
 		shifterOut.Set(false);
-		ballDrop.Set(true); // Assumes ball not pre-loaded 
-		ballGrab.Set(false);
+		
 		while (IsOperatorControl())
 		{	
-			if (stick.GetRawButton(3))
+			// Ball lifter
+			// power = stick.GetThrottle();
+			
+			SmartDashboard::PutNumber("Throttle",stick.GetThrottle());
+			SmartDashboard::PutNumber("Lifter L", ballLiftL.Get());
+			SmartDashboard::PutNumber("Lifter R", ballLiftR.Get());
+			
+			
+			if (stick.GetRawButton(6))
 			{
-				forkliftArms.Set(0.05);
+				//ballLiftL.Set(0.5);
+				//ballLiftR.Set(-0.5);
+				ballLiftL.Set(-power);
+				ballLiftR.Set(power);
 			}
-			else if (stick.GetRawButton(4))
+			else if (stick.GetRawButton(7))
 			{
-				forkliftArms.Set(-0.05);
+				//ballLiftL.Set(-0.5);
+				//ballLiftR.Set(0.5);
+				ballLiftL.Set(power);
+				ballLiftR.Set(-power);
 			}
 			else
 			{
-				forkliftArms.Set(0.0);
+				ballLiftL.Set(0.0);
+				ballLiftR.Set(0.0);
 			}
+			// Ball grabber
+			if (stick.GetRawButton(3))
+			{
+				ballGrab.Set(0.5);
+			}
+			else if (stick.GetRawButton(4))
+			{
+				ballGrab.Set(-0.5);
+			}
+			else
+			{
+				ballGrab.Set(0.0);
+			}
+			
+			SmartDashboard::PutNumber("armz", ballGrab.Get());
 			
 			/*rightEncoder=fabs(backRight.GetSpeed())*-negative(backRight.Get());
 						leftEncoder=backLeft.GetSpeed();*/
 						/*positionRight=backRight.GetPosition();
 						positionLeft=backLeft.GetPosition();*/
-			if (stick.GetRawButton(7))
-			{
-				ballGrab.Set(true);
-				ballDrop.Set(false);
-			}
-			else if (stick.GetRawButton(6))
-			{
-				ballGrab.Set(false);
-				ballDrop.Set(true);
-			}
 			
 			
 			if(stick.GetRawButton(2)&&!shiftPosDown)
