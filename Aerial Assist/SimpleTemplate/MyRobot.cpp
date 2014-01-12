@@ -52,13 +52,9 @@ public:
 	 */
 	void Autonomous(void)
 	{
-		// autonTimer.Start();
-		
+		// Super-sketchy way
+		/*
 		bool isHot = true;
-		// double distance = 0;
-		// double origPos = backLeft.GetPosition();
-		
-		// distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
 		
 		myRobot.Drive(0.0,0.0); // wubz
 		Wait(0.1);
@@ -85,10 +81,82 @@ public:
 			
 			myRobot.Drive(0.0,0.0); // stop
 		}
+		*/
 		
-		/*
+		// Semi-sketchy way
+		
+		bool isHot = true;
+		double distance = 0;
+		double origPos = backLeft.GetPosition();
+		
+		double sketchyTimer = 0.0;
+		
 		while(IsAutonomous())
 		{
+			
+			distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
+			
+			SmartDashboard::PutNumber("Timer",sketchyTimer);
+			SmartDashboard::PutNumber("Distance", distance);
+			
+			if (sketchyTimer < 1.5) // Drive forward
+			{
+				myRobot.Drive(-0.5,0.0);
+			}
+			
+			if (isHot)
+			{
+				if (sketchyTimer > 1.5 && sketchyTimer < 3) // Turn right
+				{
+					myRobot.Drive(0.3,1.0);
+				}
+				
+				if (sketchyTimer > 3 && sketchyTimer<3.1) // Stop
+				{
+					myRobot.Drive(0.0,0.0);
+				}
+				
+				if (sketchyTimer > 3.1 && sketchyTimer < 4) // Move forward
+				{
+					myRobot.Drive(-0.5,0.0);
+				}
+				
+				if (sketchyTimer > 8 && sketchyTimer < 10) // Turn left
+				{
+					myRobot.Drive(0.3,-1.0);
+				}
+				if (sketchyTimer > 10) // End of autonomous; stop.
+				{
+					myRobot.Drive(0.0,0.0);
+				}
+			}
+			else
+			{
+				if (sketchyTimer > 3 && sketchyTimer < 5) // Turn right
+				{
+					myRobot.Drive(0.3,1.0);
+				}
+				if (sketchyTimer > 5) // We're done!
+				{
+					myRobot.Drive(0.0,0.0);
+				}
+			}
+			Wait(0.1);
+			sketchyTimer = sketchyTimer + 0.1;
+		}
+		
+		
+		// Legit way
+		/*
+		autonTimer.Start();
+		
+		bool isHot = true;
+		double distance = 0;
+		double origPos = backLeft.GetPosition();
+		
+		while(IsAutonomous())
+		{
+			
 			distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
 			
 			SmartDashboard::PutNumber("Timer",autonTimer.Get());
