@@ -52,12 +52,41 @@ public:
 	 */
 	void Autonomous(void)
 	{
-		autonTimer.Start();
+		// autonTimer.Start();
 		
 		bool isHot = true;
-		double distance = 0;
-		double origPos = backLeft.GetPosition();
+		// double distance = 0;
+		// double origPos = backLeft.GetPosition();
 		
+		// distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
+		
+		myRobot.Drive(0.0,0.0); // wubz
+		Wait(0.1);
+		
+		myRobot.Drive(-0.5,0.0); // forward
+		Wait(1.5);
+		
+		if (isHot)
+		{
+			myRobot.Drive(0.3,1.0); // right
+			Wait(1.3);
+			
+			myRobot.Drive(0.0,0.0); // (wait a sec)
+			Wait(0.1);
+			
+			myRobot.Drive(-0.5,0.0); // forward
+			Wait(1.5);
+			
+			myRobot.Drive(0.0,0.0); // (wait a sec)
+			Wait(0.1);
+			
+			myRobot.Drive(0.3,-1.0); // left
+			Wait(1.3);
+			
+			myRobot.Drive(0.0,0.0); // stop
+		}
+		
+		/*
 		while(IsAutonomous())
 		{
 			distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
@@ -108,6 +137,7 @@ public:
 				}
 			}
 		}
+		*/
 			
 		
 	}
@@ -141,11 +171,11 @@ public:
 			}
 			if (stick.GetRawButton(5))
 			{
-				myRobot.Drive(1.0,1.0);
+				myRobot.Drive(0.3,1.0);
 			}
 			if (stick.GetRawButton(4))
 			{
-				myRobot.Drive(1.0,-1.0);
+				myRobot.Drive(0.3,-1.0);
 			}
 			
 			Wait(0.005);				// wait for a motor update time
