@@ -60,10 +60,12 @@ class RobotDemo : public SimpleRobot
 	Joystick cameraStick;
 	Solenoid shifterIn, shifterOut;
 	
+	CANJaguar ballGrab;
+	
 	CANJaguar ballLiftL;
 	CANJaguar ballLiftR;
 	
-	CANJaguar ballGrab;
+	DigitalInput liftLowerLimit;
 
 public:
 	RobotDemo(void):
@@ -88,7 +90,9 @@ public:
 		ballGrab(13),
 		
 		ballLiftL(16),
-		ballLiftR(17)
+		ballLiftR(17),
+		
+		liftLowerLimit(1)
 	{
 		timer.Start();
 		/*backLeft.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
@@ -145,28 +149,26 @@ public:
 			SmartDashboard::PutNumber("Throttle",stick.GetThrottle());
 			SmartDashboard::PutNumber("Lifter L", ballLiftL.Get());
 			SmartDashboard::PutNumber("Lifter R", ballLiftR.Get());
+			SmartDashboard::PutBoolean("Limit Switch",liftLowerLimit.Get());
 			
 			power = stick.GetThrottle();
-			
-			if (stick.GetRawButton(6))
+			if (liftLowerLimit.Get())
 			{
-				//ballLiftL.Set(0.5);
-				//ballLiftR.Set(-0.5);
+				ballLiftL.Set(0.0);
+				ballLiftR.Set(0.0);
+			}
+			else if (stick.GetRawButton(6))
+			{
 				ballLiftL.Set(-power);
 				ballLiftR.Set(power);
 			}
 			else if (stick.GetRawButton(7))
 			{
-				//ballLiftL.Set(-0.5);
-				//ballLiftR.Set(0.5);
 				ballLiftL.Set(power);
 				ballLiftR.Set(-power);
 			}
-			else
-			{
-				ballLiftL.Set(0.0);
-				ballLiftR.Set(0.0);
-			}
+			
+			
 			// Ball grabber
 			if (stick.GetRawButton(3))
 			{
@@ -180,7 +182,6 @@ public:
 			{
 				ballGrab.Set(0.0);
 			}
-			
 			SmartDashboard::PutNumber("armz", ballGrab.Get());
 			
 			/*rightEncoder=fabs(backRight.GetSpeed())*-negative(backRight.Get());
