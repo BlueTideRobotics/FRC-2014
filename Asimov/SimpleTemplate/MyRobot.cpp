@@ -87,8 +87,8 @@ public:
 		
 		ballGrab(13),
 		
-		ballLiftL(15),
-		ballLiftR(16)
+		ballLiftL(16),
+		ballLiftR(17)
 	{
 		timer.Start();
 		/*backLeft.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
@@ -146,6 +146,7 @@ public:
 			SmartDashboard::PutNumber("Lifter L", ballLiftL.Get());
 			SmartDashboard::PutNumber("Lifter R", ballLiftR.Get());
 			
+			power = stick.GetThrottle();
 			
 			if (stick.GetRawButton(6))
 			{
