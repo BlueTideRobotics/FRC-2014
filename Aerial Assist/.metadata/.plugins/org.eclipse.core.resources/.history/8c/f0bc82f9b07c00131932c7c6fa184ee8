@@ -1,0 +1,159 @@
+#include "WPILib.h"
+#include "PID.h"
+#include "Timer.h"
+
+/**
+ * This is a demo program showing the use of the RobotBase class.
+ * The SimpleRobot class is the base of a robot application that will automatically call your
+ * Autonomous and OperatorControl methods at the right time as controlled by the switches on
+ * the driver station or the field controls.
+ */ 
+
+class RobotDemo : public SimpleRobot
+{
+	Joystick stick; // only joystick
+	
+	CANJaguar frontLeft;
+	CANJaguar backLeft;
+	CANJaguar frontRight;
+	CANJaguar backRight;
+	RobotDrive myRobot; // robot drive system
+	
+	PID driveLeftPID;
+	PID driveRightPID;
+	
+	Gyro gyro;
+
+public:
+	RobotDemo(void):
+		
+		stick(1),
+		
+		frontLeft(14),
+		backLeft(15),
+		frontRight(11),
+		backRight(10),
+		myRobot(frontLeft, backLeft, frontRight, backRight),
+		driveLeftPID(0,0,0,100,100),
+		driveRightPID(0,0,0,100,100),
+		
+		gyro(1)
+		
+	{
+		backLeft.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
+		backRight.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
+		backRight.SetPositionReference(CANJaguar::kPosRef_QuadEncoder);
+		backLeft.SetPositionReference(CANJaguar::kPosRef_QuadEncoder);
+		
+		backLeft.ConfigEncoderCodesPerRev(360);
+		backRight.ConfigEncoderCodesPerRev(360);
+		
+		myRobot.SetExpiration(0.1);
+		gyro.Reset();
+		
+	}
+	
+	void Autonomous(void)
+	{
+		
+		// Semi-sketchy way
+		bool isHot = true;
+		double distance = 0;
+		double origPos = backLeft.GetPosition();
+		
+		double sketchyTimer = 0.0;
+		
+		bool turning = false;
+		bool left = false;
+		
+		while(IsAutonomous())
+		{
+			SmartDashboard::PutNumber("Timer",sketchyTimer);
+			SmartDashboard::PutNumber("Distance", distance);
+			
+			if (distance < 60) // Drive forward
+			{
+				myRobot.Drive(-0.5,0.0);
+			}
+			else
+			{
+				turning = true;
+				gyro.Reset();
+			}
+			
+			if (turning)
+			{
+				if (fabs(gyro.GetAngle()) < 90)
+				{
+					if (left) 
+					{
+						myRobot.Drive(0.3,-1.0);
+					}
+					else
+					{
+						myRobot.Drive(0.3,1.0);
+					}
+				}
+				else
+				{
+					turning = false;
+					myRobot.Drive(0.0,0.0)
+				}
+			}
+			
+			Wait(0.005);
+			sketchyTimer = sketchyTimer + 0.005;
+			distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
+		}
+					
+		
+	}
+
+	/**
+	 * Runs the motors with arcade steering. 
+	 */
+	void OperatorControl(void)
+	{
+		myRobot.SetSafetyEnabled(true);
+		double distance = 0;
+		double origPos = backLeft.GetPosition();	
+		while (IsOperatorControl())
+		{
+			// myRobot.ArcadeDrive(-stick); // drive with arcade style (use right stick)
+			
+			myRobot.Drive(stick.GetY(),0.0); // drive straight
+			
+			SmartDashboard::PutNumber("Position",backLeft.GetPosition());
+			SmartDashboard::PutNumber("Speed",backLeft.GetSpeed());
+			
+			// distance = 18.84955592153876 * fabs(backLeft.GetPosition() - origPos);
+			distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
+			
+			SmartDashboard::PutNumber("Distance",distance);
+			
+			if (stick.GetRawButton(1))
+			{
+				origPos = backLeft.GetPosition();
+			}
+			if (stick.GetRawButton(5))
+			{
+				myRobot.Drive(0.3,1.0);
+			}
+			if (stick.GetRawButton(4))
+			{
+				myRobot.Drive(0.3,-1.0);
+			}
+			
+		}
+	}
+	
+	/**
+	 * Runs during test mode
+	 */
+	void Test() {
+
+	}
+};
+
+START_ROBOT_CLASS(RobotDemo);
+

@@ -11,29 +11,33 @@
 
 class RobotDemo : public SimpleRobot
 {
-	Timer autonTimer;
+	Joystick stick; // only joystick
+	
 	CANJaguar frontLeft;
+	CANJaguar backLeft;
 	CANJaguar frontRight;
 	CANJaguar backRight;
-	CANJaguar backLeft;
 	RobotDrive myRobot; // robot drive system
-	
-	Joystick stick; // only joystick
 	
 	PID driveLeftPID;
 	PID driveRightPID;
+	
+	Gyro gyro;
 
 public:
 	RobotDemo(void):
 		
 		stick(1),
+		
 		frontLeft(14),
 		backLeft(15),
 		frontRight(11),
 		backRight(10),
 		myRobot(frontLeft, backLeft, frontRight, backRight),
 		driveLeftPID(0,0,0,100,100),
-		driveRightPID(0,0,0,100,100)
+		driveRightPID(0,0,0,100,100),
+		
+		gyro(1)
 		
 	{
 		backLeft.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
@@ -45,168 +49,66 @@ public:
 		backRight.ConfigEncoderCodesPerRev(360);
 		
 		myRobot.SetExpiration(0.1);
+		gyro.Reset();
+		
 	}
-
-	/**
-	 * Drive left & right motors for 2 seconds then stop
-	 */
+	
 	void Autonomous(void)
 	{
-		// Super-sketchy way
-		/*
-		bool isHot = true;
-		
-		myRobot.Drive(0.0,0.0); // wubz
-		Wait(0.1);
-		
-		myRobot.Drive(-0.5,0.0); // forward
-		Wait(1.5);
-		
-		if (isHot)
-		{
-			myRobot.Drive(0.3,1.0); // right
-			Wait(1.3);
-			
-			myRobot.Drive(0.0,0.0); // (wait a sec)
-			Wait(0.1);
-			
-			myRobot.Drive(-0.5,0.0); // forward
-			Wait(1.5);
-			
-			myRobot.Drive(0.0,0.0); // (wait a sec)
-			Wait(0.1);
-			
-			myRobot.Drive(0.3,-1.0); // left
-			Wait(1.3);
-			
-			myRobot.Drive(0.0,0.0); // stop
-		}
-		*/
 		
 		// Semi-sketchy way
-		
 		bool isHot = true;
 		double distance = 0;
 		double origPos = backLeft.GetPosition();
 		
 		double sketchyTimer = 0.0;
 		
+		bool turning = false;
+		bool left = false;
+		
 		while(IsAutonomous())
 		{
-			
-			distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
-			
 			SmartDashboard::PutNumber("Timer",sketchyTimer);
 			SmartDashboard::PutNumber("Distance", distance);
+			SmartDashboard::PutNumber("Gyro", gyro.GetAngle());
 			
-			if (sketchyTimer < 1.5) // Drive forward
+			if (distance < 60) // Drive forward
 			{
 				myRobot.Drive(-0.5,0.0);
 			}
-			
-			if (isHot)
-			{
-				if (sketchyTimer > 1.5 && sketchyTimer < 3) // Turn right
-				{
-					myRobot.Drive(0.3,1.0);
-				}
-				
-				if (sketchyTimer > 3 && sketchyTimer<3.1) // Stop
-				{
-					myRobot.Drive(0.0,0.0);
-				}
-				
-				if (sketchyTimer > 3.1 && sketchyTimer < 4) // Move forward
-				{
-					myRobot.Drive(-0.5,0.0);
-				}
-				
-				if (sketchyTimer > 8 && sketchyTimer < 10) // Turn left
-				{
-					myRobot.Drive(0.3,-1.0);
-				}
-				if (sketchyTimer > 10) // End of autonomous; stop.
-				{
-					myRobot.Drive(0.0,0.0);
-				}
-			}
 			else
 			{
-				if (sketchyTimer > 3 && sketchyTimer < 5) // Turn right
+				turning = true;
+				gyro.Reset();
+			}
+			
+			if (turning)
+			{
+				if (fabs(gyro.GetAngle()) < 90)
 				{
-					myRobot.Drive(0.3,1.0);
+					if (left) 
+					{
+						myRobot.Drive(0.3,-1.0);
+					}
+					else
+					{
+						myRobot.Drive(0.3,1.0);
+					}
 				}
-				if (sketchyTimer > 5) // We're done!
+				else
 				{
-					myRobot.Drive(0.0,0.0);
+					turning = false;
+					myRobot.Drive(0.0,0.0)
 				}
 			}
-			Wait(0.1);
-			sketchyTimer = sketchyTimer + 0.1;
-		}
-		
-		
-		// Legit way
-		/*
-		autonTimer.Start();
-		
-		bool isHot = true;
-		double distance = 0;
-		double origPos = backLeft.GetPosition();
-		
-		while(IsAutonomous())
-		{
 			
+			Wait(0.005);
+			
+			// Update time and distance
+			sketchyTimer = sketchyTimer + 0.005;
 			distance = (50.5/3.462) * fabs(backLeft.GetPosition() - origPos);
-			
-			SmartDashboard::PutNumber("Timer",autonTimer.Get());
-			SmartDashboard::PutNumber("Distance", distance);
-			
-			if (autonTimer.Get() < 1.5) // Drive forward
-			{
-				myRobot.Drive(-0.5,0.0);
-			}
-			
-			if (isHot)
-			{
-				if (autonTimer.Get() > 1.5 && autonTimer.Get() < 3) // Turn right
-				{
-					myRobot.Drive(0.3,1.0);
-				}
-				
-				if (autonTimer.Get() > 3 && autonTimer.Get()<3.1) // Stop
-				{
-					myRobot.Drive(0.0,0.0);
-				}
-				
-				if (autonTimer.Get() > 3.1 && autonTimer.Get() < 4) // Move forward
-				{
-					myRobot.Drive(-0.5,0.0);
-				}
-				
-				if (autonTimer.Get() > 8 && autonTimer.Get() < 10) // Turn left
-				{
-					myRobot.Drive(0.3,-1.0);
-				}
-				if (autonTimer.Get() > 10) // End of autonomous; stop.
-				{
-					myRobot.Drive(0.0,0.0);
-				}
-			}
-			else
-			{
-				if (autonTimer.Get() > 3 && autonTimer.Get() < 5) // Turn right
-				{
-					myRobot.Drive(0.3,1.0);
-				}
-				if (autonTimer.Get() > 5) // We're done!
-				{
-					myRobot.Drive(0.0,0.0);
-				}
-			}
 		}
-		*/
-			
+					
 		
 	}
 
@@ -217,8 +119,7 @@ public:
 	{
 		myRobot.SetSafetyEnabled(true);
 		double distance = 0;
-		double origPos = backLeft.GetPosition();
-		
+		double origPos = backLeft.GetPosition();	
 		while (IsOperatorControl())
 		{
 			// myRobot.ArcadeDrive(-stick); // drive with arcade style (use right stick)
@@ -246,7 +147,6 @@ public:
 				myRobot.Drive(0.3,-1.0);
 			}
 			
-			Wait(0.005);				// wait for a motor update time
 		}
 	}
 	
