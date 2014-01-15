@@ -135,7 +135,7 @@ public:
 		float cameraTilt=0.677;
 		bool shiftPos=true;
 		bool shiftPosDown=false;
-		double power = 0.5;
+		double liftMotorsSet = 0.5;
 		
 		// Initial pneumatic states
 		shifterIn.Set(true);
@@ -144,29 +144,31 @@ public:
 		while (IsOperatorControl())
 		{	
 			// Ball lifter
-			// power = stick.GetThrottle();
+			// liftMotorsSet = stick.GetThrottle();
 			
 			SmartDashboard::PutNumber("Throttle",stick.GetThrottle());
 			SmartDashboard::PutNumber("Lifter L", ballLiftL.Get());
 			SmartDashboard::PutNumber("Lifter R", ballLiftR.Get());
 			SmartDashboard::PutBoolean("Limit Switch",liftLowerLimit.Get());
 			
-			power = stick.GetThrottle();
-			if (liftLowerLimit.Get())
+			
+			if (stick.GetRawButton(7))
 			{
-				ballLiftL.Set(0.0);
-				ballLiftR.Set(0.0);
+				liftMotorsSet = stick.GetThrottle();
 			}
 			else if (stick.GetRawButton(6))
 			{
-				ballLiftL.Set(-power);
-				ballLiftR.Set(power);
+				liftMotorsSet = -stick.GetThrottle();
 			}
-			else if (stick.GetRawButton(7))
+			
+			if (liftLowerLimit.Get()&&!stick.GetRawButton(7))
 			{
-				ballLiftL.Set(power);
-				ballLiftR.Set(-power);
+				liftMotorsSet = 0.0;
 			}
+			
+			ballLiftL.Set(liftMotorsSet);
+			ballLiftR.Set(-liftMotorsSet);
+			
 			
 			
 			// Ball grabber
