@@ -160,6 +160,10 @@ public:
 			{
 				liftMotorsSet = -stick.GetThrottle();
 			}
+			else
+			{
+				liftMotorsSet = 0.0;
+			}
 			
 			if (liftLowerLimit.Get()&&!stick.GetRawButton(7))
 			{
