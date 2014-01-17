@@ -23,6 +23,8 @@ class RobotDemo : public SimpleRobot
 	PID driveRightPID;
 	
 	Gyro gyro;
+	
+	Timer actualTimer;
 
 public:
 	RobotDemo(void):
@@ -37,7 +39,9 @@ public:
 		driveLeftPID(0,0,0,100,100),
 		driveRightPID(0,0,0,100,100),
 		
-		gyro(1)
+		gyro(1),
+		
+		actualTimer()
 		
 	{
 		backLeft.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
@@ -66,9 +70,12 @@ public:
 		bool turning = false;
 		bool left = false;
 		
+		actualTimer.Start();
+		
 		while(IsAutonomous())
 		{
-			SmartDashboard::PutNumber("Timer",sketchyTimer);
+			SmartDashboard::PutNumber("Sketchy Timer",sketchyTimer);
+			SmartDashboard::PutNumber("Real timer", actualTimer.Get());
 			SmartDashboard::PutNumber("Distance", distance);
 			SmartDashboard::PutNumber("Gyro", gyro.GetAngle());
 			
@@ -78,6 +85,7 @@ public:
 			}
 			else
 			{
+				myRobot.Drive(0.0,0.0);
 				turning = true;
 				gyro.Reset();
 			}
@@ -98,7 +106,7 @@ public:
 				else
 				{
 					turning = false;
-					myRobot.Drive(0.0,0.0)
+					myRobot.Drive(0.0,0.0);
 				}
 			}
 			
