@@ -6,14 +6,14 @@
 class RobotDemo : public SimpleRobot
 {
 	Joystick stick;
-	DigitalInput pressureInCylinder;
-	Relay *pneumaRelay;
 	
 	Solenoid liftUp;
 	Solenoid liftDown;
 	Solenoid gripperOpen;
 	Solenoid gripperClose;
-
+	
+	DigitalInput pressureInCylinder;
+	Relay pneumaRelay;
 public:
 	RobotDemo(void):
 		stick(1),
@@ -23,9 +23,11 @@ public:
 		gripperOpen(6),
 		gripperClose(8),
 		
-		pressureInCylinder(1)
-	 {
-		pneumaRelay = new Relay(1);//, Relay::kForwardOnly
+		pressureInCylinder(1),
+		
+		pneumaRelay(8)
+	{
+		
 	}
 
 	void Autonomous(void)
@@ -48,17 +50,20 @@ public:
 		bool relaySet=false;
 		
 		// Initializing lift down
+		/*
 		liftUp.Set(false);
 		liftDown.Set(true);
 		
 		//Initializing gripper open
 		gripperOpen.Set(true);
 		gripperClose.Set(false);
+		*/
 		
 		while (IsOperatorControl())
 		{
 			// Update Smart Dashboard values
 			SmartDashboard::PutBoolean("relaySet",relaySet);
+			SmartDashboard::PutBoolean("Relay on?",pneumaRelay.Get());
 			SmartDashboard::PutBoolean("Pressa",pressureInCylinder.Get());
 			SmartDashboard::PutBoolean("Lift Up",liftUp.Get());
 			SmartDashboard::PutBoolean("Lift Down",liftDown.Get());
@@ -79,14 +84,15 @@ public:
 			// Control relay using 'relaySet' and the pressure sensor.
 			if (relaySet&&!pressureInCylinder.Get())
 			{
-				pneumaRelay->Set(Relay::kForward);
+				pneumaRelay.Set(Relay::kOn);
 			}
 			else
 			{
-				pneumaRelay->Set(Relay::kOff);
+				pneumaRelay.Set(Relay::kOff);
 			}
 			
 			// Makes stuff move with solenoids
+			/*
 			if(stick.GetRawButton(4)) // Close
 			{
 				gripperClose.Set(true);
@@ -106,6 +112,21 @@ public:
 			{
 				liftUp.Set(true);
 				liftDown.Set(false);
+			}
+			*/
+			if (stick.GetRawButton(6))
+			{
+				liftUp.Set(true);
+				liftDown.Set(true);
+				gripperOpen.Set(false);
+				gripperClose.Set(false);
+			}
+			else if (stick.GetRawButton(7))
+			{
+				liftUp.Set(false);
+				liftDown.Set(false);
+				gripperOpen.Set(true);
+				gripperClose.Set(true);
 			}
 		}
 	}
