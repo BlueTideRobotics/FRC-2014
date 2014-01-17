@@ -62,10 +62,12 @@ class RobotDemo : public SimpleRobot
 	
 	CANJaguar ballGrab;
 	
-	CANJaguar ballLiftL;
-	CANJaguar ballLiftR;
+	CANJaguar ballLift;
 	
 	DigitalInput liftLowerLimit;
+	Relay sage;
+	
+	Gyro gyro;
 
 public:
 	RobotDemo(void):
@@ -89,10 +91,13 @@ public:
 		
 		ballGrab(13),
 		
-		ballLiftL(16),
-		ballLiftR(17),
+		ballLift(16), // May be 17? Idk
 		
-		liftLowerLimit(1)
+		liftLowerLimit(14),
+		
+		sage(1),
+		
+		gyro(8)
 	{
 		timer.Start();
 		/*backLeft.SetSpeedReference(CANJaguar::kSpeedRef_QuadEncoder);
@@ -105,6 +110,8 @@ public:
 		dslcd=DriverStationLCD::GetInstance();
 		myRobot.SetExpiration(0.1);
 		//try to use autonomous by calling it from within here
+		
+		gyro.Reset();
 	}
 
 	/**
@@ -147,10 +154,16 @@ public:
 			// liftMotorsSet = stick.GetThrottle();
 			
 			SmartDashboard::PutNumber("Throttle",stick.GetThrottle());
-			SmartDashboard::PutNumber("Lifter L", ballLiftL.Get());
-			SmartDashboard::PutNumber("Lifter R", ballLiftR.Get());
-			SmartDashboard::PutBoolean("Limit Switch",liftLowerLimit.Get());
+			SmartDashboard::PutNumber("Lifter", ballLift.Get());
+			SmartDashboard::PutBoolean("Lift lower limit",liftLowerLimit.Get());
+			SmartDashboard::PutNumber("Gyro",gyro.GetAngle());
 			
+			if (stick.GetRawButton(5))
+			{
+				sage.Set(Relay::kOn);
+			}
+			else
+				sage.Set(Relay::kOff);
 			
 			if (stick.GetRawButton(7))
 			{
@@ -170,8 +183,7 @@ public:
 				liftMotorsSet = 0.0;
 			}
 			
-			ballLiftL.Set(liftMotorsSet);
-			ballLiftR.Set(-liftMotorsSet);
+			ballLift.Set(liftMotorsSet);
 			
 			
 			
